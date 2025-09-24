@@ -71,7 +71,7 @@ Our ER model addresses the following MNHS requirements:
     \item Medications include: DrugID, name, form, strength, manufacturer, therapeutic, class and active ingredient.
     \item Insurance coverage (CNOPS, CNSS, RAMED, private, or none), allowing multiple insurances per patient.
     \item Billing attached to clinical activities and linked to one insurance.
-    \item Emergencies 
+    \item Emergencies
     \item Pharmacy inventory tracked per hospital and medication (quantity, reorder level, unit price).
 \end{itemize}
 \newpage
@@ -85,7 +85,7 @@ In order to explain the design choices we will go through two sections: Entities
     \item Medications: the drugID is considered as our primary key to this entity, different attributes are linked to it to record the medications characteristics (class, name, from ...)
     \item Insurance: it has the attribute coverage type that holds different values (CNOPS, CNSS, RAMED, OR None)
     \item Bills: identified by the billID
-    \item Emergencies: has the attributes admission timestamp, triage level(from 1(immediate) to 5(Non-Urgent)) and outcome;
+    \item Emergency: Considered as weak entity to patients, has the attributes admission timestamp, triage level(from 1(immediate) to 5(Non-Urgent)) and outcome;
 \end{itemize}
 \subsection{Relations Between the entities}
 \begin{itemize}
@@ -96,7 +96,7 @@ In order to explain the design choices we will go through two sections: Entities
         \item Covers: It's a relation that links between a patient and an insurance, as in the lab description a patient can have more than one insurance.
         \item Appointments: We've chosen to represent it as a ternary relationship between Patient, Department and Staff.The usage of Bold arrows is justified by the constraint that the relation is between exactly one patient one staff and one department, and it records status, reason, time, date.
         \item Prescription: it's a ternary relation between patient, staff and medication, it's not a total participation because a prescription may not contain a medication.In addition it holds three attributes: dosage, duration and a date.
-        \item Emergency: 
+        \item undergoes: Links the patients with emergency as weak entity because its existence depends on patients existence.
     \end{enumerate}
     \item Staff Related Relationships:
     \begin{enumerate}
@@ -122,7 +122,12 @@ and unit price per medication.
         \item Prescription: Already discussed on Patients relations.
         \item Pharmacy Inventory: Already discussed on Hospital relations.
     \end{enumerate}
-
+    \item Bills:
+    \begin{enumerate}
+        \item Clinical Activities: Already discussed on the patients relations.
+        \item Linked to: each bill is only linked to exactly one
+insurance, and an insurance has at least one bill.
+    \end{enumerate}
 \end{itemize} 
 \section{Implementation \& Results}
 \begin{figure}  % [p] forces it onto its own page
