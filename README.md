@@ -54,10 +54,15 @@ Design an ER model to help MNHS manage patients, staff, hospitals, departments, 
 ## 📂 Repository Structure
 ```
 .
-├── Conceptual_Design_Report.pdf # Full project report
-├── UM6P_CC_DMG_LAB2-2.pdf # Lab instructions and requirements
-├── ER_Diagram.png # (Add exported ER diagram here if available)
-└── README.md # Project overview (this file)
+├─ Conceptual Design/
+│  ├─ Conceptual_Design_Report.pdf       #The finale report       
+│  ├─ DMG_Project.tex                    #The latex code 
+│  ├─ UM6P_CC_DMG_LAB2-2.pdf             #The project instruction
+│  └─ Figures/
+│     ├─ CC.jpg
+│     ├─ ER diagram.png                  #The ER diagram
+│     └─ UM6Plogo.png
+└─ README.md
 ```
 
 
