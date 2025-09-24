@@ -55,7 +55,7 @@ Design an ER model to help MNHS manage patients, staff, hospitals, departments, 
 ```
 .
 ├─ Conceptual Design/
-│  ├─ Conceptual_Design_Report.pdf       #The finale report       
+│  ├─ Conceptual_Design_Report.pdf       #The final report       
 │  ├─ DMG_Project.tex                    #The latex code 
 │  ├─ UM6P_CC_DMG_LAB2-2.pdf             #The project instruction
 │  └─ Figures/
@@ -69,6 +69,6 @@ Design an ER model to help MNHS manage patients, staff, hospitals, departments, 
 ## 📅 Course Information
 - **Course:** Data Management  
 - **Professor:** Karima Echihabi  
-- **Program:** Computer Engineering  
+- **Program:** Computer science  
 - **Institution:** UM6P – College of Computing  
 - **Session:** Fall 2025  
