@@ -1,4 +1,3 @@
-# QueryMasters
 # QueryMasters – MNHS Database Project
 
 ## 📌 Project Overview
