@@ -104,3 +104,50 @@ CREATE TABLE IF NOT EXISTS Emergency(
     FOREIGN KEY (CAID) REFERENCES ClinicalActivity(CAID)
         ON DELETE CASCADE
 );
+
+
+INSERT INTO Hospital (HID, Name, City, Region)
+VALUES 
+(40, 'Hospital A', 'Benguerir', 'Region A'),
+(50, 'Hospital B', 'Casablanca', 'Region B'),
+(60, 'Hospital C', 'Rabat', 'Region C'),
+(70, 'Hospital D', 'Marrakech', 'Region D'),
+(80, 'Hospital E', 'Tangier', 'Region E');
+
+
+INSERT INTO Patient (IID, CIN, Name, Sex, Birth, BloodGroup, Phone)
+VALUES 
+(1001, 'BB532415', 'Salma', 'F', '2006-04-14', 'O+', '0612452318'),
+(1002, 'BJ234567', 'Hiba', 'F', '2006-06-26', 'O-', '0614567833'),
+(1003, 'BH123456', 'Sara', 'F', '2006-07-26', 'A+', '0616234590'),
+(1004, 'BH125457', 'Amine', 'M', '1982-07-26', 'A-', '0616224596'),
+(1005, 'BJ113426', 'Mohammed', 'M', '1998-07-26', 'A+', '0617234594');
+
+INSERT INTO Department (DEP_ID, Name, Specialty, HID)
+VALUES 
+(1, 'Radiology', 'Medical imaging', 40),       
+(2, 'Cardiology', 'Cardiovascular Medicine', 50),
+(3, 'Neurology', 'Brain and nervous system', 60),
+(4, 'Oncology', 'Cancer Treatment', 70),
+(5, 'Neurosurgery', 'Brain and Nervous System', 80);
+
+SELECT p.Name
+FROM Patient p
+JOIN ClinicalActivity ca ON p.IID = ca.IID
+JOIN Appointment a ON ca.CAID = a.CAID
+JOIN Department d ON ca.DEP_ID = d.DEP_ID
+JOIN Hospital h ON d.HID = h.HID
+WHERE h.City = 'Benguerir' AND a.Status = 'scheduled';
+
+SHOW TABLES;
+SELECT * FROM Patient; 
+SELECT * FROM Staff;
+SELECT * FROM Practitioner;
+SELECT * FROM Caregiving;
+SELECT * FROM Technical;
+SELECT * FROM Hospital;
+SELECT * FROM Department;
+SELECT * FROM WorkIn;
+SELECT * FROM ClinicalActivity;
+SELECT * FROM Appointment;
+SELECT * FROM Emergency;
