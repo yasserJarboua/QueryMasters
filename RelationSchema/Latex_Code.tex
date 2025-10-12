@@ -98,7 +98,7 @@ In this initial phase, we organized our ER model into a relational schema follow
     \item \subsubsection*{Patient}
         \paragraph*{Attributes:} IID (PK), CIN, Name, Sex, Birth, BloodGroup, Phone.
         \paragraph*{Notes:}IID uniquely identifies each patient; CIN appears as a secondary identifier in the diagram, but IID is the central key used for the links.
-        \paragraph*{Foreign keys:}None
+        \paragraph*{Foreign keys:},None
         \paragraph*{Participation:}
         \begin{itemize}
           \item Total in ClinicalActivity (every activity belongs to a patient). 
@@ -220,7 +220,10 @@ In this initial phase, we organized our ER model into a relational schema follow
         \end{itemize}
         \paragraph*{Domain checks:}
         \begin{itemize}
-            \item DateIssued: VARCHAR(50), CHECK (LENGTH(DateIssued) $>=$ 4).
+            \item HID: INT NOT NULL,
+            \item NAME: VARCHAR(100) NOT NULL,
+            \item CITY: VARCHAR(100),
+            \item REGION : VARCHAR(100)
         \end{itemize}
         
     \item \subsubsection*{Medication}
@@ -246,9 +249,11 @@ In this initial phase, we organized our ER model into a relational schema follow
         \paragraph*{Participation:}
         \begin{itemize}
             \item Total from Prescription to ClinicalActivity.
+            \item Partial from Prescription tp Medication
         \end{itemize}
         \paragraph*{Domain checks:}
         \begin{itemize}
+            \item PID : INT NOT NULL,
             \item DateIssued: VARCHAR(50) (date format)
         \end{itemize}
 
