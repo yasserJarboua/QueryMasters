@@ -43,26 +43,33 @@ Design and implement a comprehensive database system to help MNHS manage patient
 ## 📂 Repository Structure
 ```
 .
-├─ Conceptual Design/
-│  ├─ Conceptual_Design_Report.pdf       #The final report       
-│  ├─ DMG_Project.tex                    #The latex code 
-│  ├─ UM6P_CC_DMG_LAB2-2.pdf             #The project instruction
-│  └─ Figures/
-│     ├─ CC.jpg
-│     ├─ ER diagram.png                  #The ER diagram
-│     └─ UM6Plogo.png
-├─  Relational Schema/
-│  ├─ Relational_Schema_Report.pdf       #The final report       
-│  ├─ Relational_Schema_Report.tex       #The latex code 
-│  ├─ UM6P_CC_DM-LAB3.pdf                #The project instruction
-│  └─ Figures/
-│     ├─ CC.jpg
-│     ├─ UM6Plogo.png
-│     ├─ WorkIn.png                      #screenshots 
-│     ├─ Practitioner.png + query.png + tables.png + Staff.png + Technical.png 
-│     ├─ Emergency.png + Expense.png + Hospital.png + Insurance.png + Patient.png    
-│     └─ Appintment.png + Caregiving.png + ClinicalActivity.png + Department.png
-└─ README.md
+├── ConceptualDesign/
+|   ├── Figures/
+|   |   ├── CC.jpg
+|   |   ├── ER Diagram.png
+|   |   └── UM6Plogo.png
+|   |
+|   ├── Conceptual_Design_Report.pdf
+|   ├── DMG_Project.tex
+|   └── UM6P_CC_DMG_LAB2-2.pdf
+|
+├── RelationSchema/
+|   ├── Figures/
+|   |   ├── CC.jpg
+|   |   ├── Hospital.png
+|   |   ├── Patient.png
+|   |   ├── UM6Plogo.png
+|   |   ├── query.png
+|   |   └── show tables.png
+|   |
+|   ├── Tables_Screenshots/
+|   |
+|   ├── Latex_Code.tex
+|   ├── Relational_Schema_Report.pdf
+|   ├── SQL_Implementation.sql
+|   └── UM6P_CC_DM-LAB3-2.pdf
+|
+└── README.md
 ```
 ---
 
