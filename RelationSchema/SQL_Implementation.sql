@@ -3,10 +3,8 @@ USE MNHS_DB;
 
 CREATE TABLE IF NOT EXISTS Patient (
     IID INT PRIMARY KEY,
-    CIN VARCHAR(20) UNIQUE
-        CHECK (CIN REGEXP '^[A-Za-z0-9]+$'),
-    Name VARCHAR(100) NOT NULL
-        CHECK (Name REGEXP '^[A-Za-z ]+$'),
+    CIN VARCHAR(20) UNIQUE,
+    Name VARCHAR(100) NOT NULL,
     Sex CHAR(1)
         CHECK (Sex IN ('M', 'F')),
     Birth DATE NOT NULL
@@ -14,7 +12,6 @@ CREATE TABLE IF NOT EXISTS Patient (
     BloodGroup VARCHAR(5)
         CHECK (BloodGroup IN ('A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-')),
     Phone VARCHAR(15)
-        CHECK (Phone REGEXP '^[0-9]{10,15}$')
 );
 
 CREATE TABLE IF NOT EXISTS Staff (
