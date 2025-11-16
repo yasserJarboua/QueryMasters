@@ -442,8 +442,8 @@ SELECT
     m.Manufacturer
 FROM Medication m
 JOIN Stock s ON m.MID = s.MID
-WHERE m.TherapeuticClass = 'Antibiotic'
-  AND m.UnitPrice < 200;
+WHERE m.TherapeuticClass = 'Antibiotique'
+  AND s.UnitPrice < 200;
 
 -- 9. For each hospital list the top three most expensive medications.
 SELECT H.Name AS HospitalName, M.Name AS MedicationName, S.UnitPrice
@@ -504,7 +504,7 @@ GROUP BY H.HID, CA.STAFF_ID;
 -- query 13
 SELECT M.Name AS Medication, H.Name AS Hospital
 FROM Hospital H, Stock S, Medication M
-WHERE H.HID = S.HID AND M.MID = S.MID AND S.Qty < S.OrderLevel;
+WHERE H.HID = S.HID AND M.MID = S.MID AND S.Qty < S.ReorderLevel;
 
 -- query 14 
 SELECT H.*  FROM Hospital H 
