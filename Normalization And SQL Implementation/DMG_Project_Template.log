@@ -1,0 +1,962 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.25)  17 NOV 2025 00:01
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
+**"c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex"
+(c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+(C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
+File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count275
+\c@section=\count276
+\c@subsection=\count277
+\c@subsubsection=\count278
+\c@paragraph=\count279
+\c@subparagraph=\count280
+\c@figure=\count281
+\c@table=\count282
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen148
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/base\inputenc.sty
+Package: inputenc 2024/02/08 v1.3d Input encoding file
+\inpenc@prehook=\toks17
+\inpenc@posthook=\toks18
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks19
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+))
+\Gm@cnth=\count283
+\Gm@cntv=\count284
+\c@Gm@tempcnt=\count285
+\Gm@bindingoffset=\dimen149
+\Gm@wd@mp=\dimen150
+\Gm@odd@mp=\dimen151
+\Gm@even@mp=\dimen152
+\Gm@layoutwidth=\dimen153
+\Gm@layoutheight=\dimen154
+\Gm@layouthoffset=\dimen155
+\Gm@layoutvoffset=\dimen156
+\Gm@dimlist=\toks20
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 106.
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2024/04/13 v1.2c Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen157
+\Gin@req@width=\dimen158
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/fancyhdr\fancyhdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+\f@nch@headwidth=\skip51
+\f@nch@offset@elh=\skip52
+\f@nch@offset@erh=\skip53
+\f@nch@offset@olh=\skip54
+\f@nch@offset@orh=\skip55
+\f@nch@offset@elf=\skip56
+\f@nch@offset@erf=\skip57
+\f@nch@offset@olf=\skip58
+\f@nch@offset@orf=\skip59
+\f@nch@height=\skip60
+\f@nch@footalignment=\skip61
+\f@nch@widthL=\skip62
+\f@nch@widthC=\skip63
+\f@nch@widthR=\skip64
+\@temptokenb=\toks21
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/tcolorbox\tcolorbox.sty
+Package: tcolorbox 2025/09/09 version 6.8.0 text color boxes
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/frontendlayer\tikz.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgf.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfrcs.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-common.tex
+\pgfutil@everybye=\toks22
+\pgfutil@tempdima=\dimen159
+\pgfutil@tempdimb=\dimen160
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfutil-latex.def
+\pgfutil@abb=\box53
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfrcs.code.tex (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf\pgf.revision.tex)
+Package: pgfrcs 2025-08-29 v3.1.11a (3.1.11a)
+))
+Package: pgf 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/basiclayer\pgfcore.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/systemlayer\pgfsys.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys.code.tex
+Package: pgfsys 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks23
+\pgfkeys@temptoks=\toks24
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeyslibraryfiltered.code.tex
+\pgfkeys@tmptoks=\toks25
+))
+\pgf@x=\dimen161
+\pgf@y=\dimen162
+\pgf@xa=\dimen163
+\pgf@ya=\dimen164
+\pgf@xb=\dimen165
+\pgf@yb=\dimen166
+\pgf@xc=\dimen167
+\pgf@yc=\dimen168
+\pgf@xd=\dimen169
+\pgf@yd=\dimen170
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count286
+\c@pgf@countb=\count287
+\c@pgf@countc=\count288
+\c@pgf@countd=\count289
+\t@pgf@toka=\toks26
+\t@pgf@tokb=\toks27
+\t@pgf@tokc=\toks28
+\pgf@sys@id@count=\count290
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgf.cfg
+File: pgf.cfg 2025-08-29 v3.1.11a (3.1.11a)
+)
+Driver file for pgf: pgfsys-pdftex.def
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfsyssoftpath@smallbuffer@items=\count291
+\pgfsyssoftpath@bigbuffer@items=\count292
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 274.
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1353.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcore.code.tex
+Package: pgfcore 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathutil.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathparser.code.tex
+\pgfmath@dimen=\dimen171
+\pgfmath@count=\count293
+\pgfmath@box=\box54
+\pgfmath@toks=\toks29
+\pgfmath@stack@operand=\toks30
+\pgfmath@stack@operation=\toks31
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.basic.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.trigonometric.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.random.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.comparison.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.base.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.round.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.misc.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfunctions.integerarithmetics.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathcalc.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count294
+)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfint.code.tex) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@picminx=\dimen172
+\pgf@picmaxx=\dimen173
+\pgf@picminy=\dimen174
+\pgf@picmaxy=\dimen175
+\pgf@pathminx=\dimen176
+\pgf@pathmaxx=\dimen177
+\pgf@pathminy=\dimen178
+\pgf@pathmaxy=\dimen179
+\pgf@xx=\dimen180
+\pgf@xy=\dimen181
+\pgf@yx=\dimen182
+\pgf@yy=\dimen183
+\pgf@zx=\dimen184
+\pgf@zy=\dimen185
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@path@lastx=\dimen186
+\pgf@path@lasty=\dimen187
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@shorten@end@additional=\dimen188
+\pgf@shorten@start@additional=\dimen189
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfpic=\box55
+\pgf@hbox=\box56
+\pgf@layerbox@main=\box57
+\pgf@picture@serial@count=\count295
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgflinewidth=\dimen190
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@pt@x=\dimen191
+\pgf@pt@y=\dimen192
+\pgf@pt@temp=\dimen193
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfarrowsep=\dimen194
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@max=\dimen195
+\pgf@sys@shading@range@num=\count296
+\pgf@shadingcount=\count297
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfexternal@startupbox=\box58
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/basiclayer\pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfnodeparttextbox=\box59
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@nodesepstart=\dimen196
+\pgf@nodesepend=\dimen197
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/compatibility\pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2025-08-29 v3.1.11a (3.1.11a)
+)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgffor.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/utilities\pgfkeys.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgfkeys.code.tex)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/pgf/math\pgfmath.sty (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/math\pgfmath.code.tex)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/utilities\pgffor.code.tex
+Package: pgffor 2025-08-29 v3.1.11a (3.1.11a)
+\pgffor@iter=\dimen198
+\pgffor@skip=\dimen199
+\pgffor@stack=\toks32
+\pgffor@toks=\toks33
+)) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz\tikz.code.tex
+Package: tikz 2025-08-29 v3.1.11a (3.1.11a)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/libraries\pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgf@plot@mark@count=\count298
+\pgfplotmarksize=\dimen256
+)
+\tikz@lastx=\dimen257
+\tikz@lasty=\dimen258
+\tikz@lastxsaved=\dimen259
+\tikz@lastysaved=\dimen260
+\tikz@lastmovetox=\dimen261
+\tikz@lastmovetoy=\dimen262
+\tikzleveldistance=\dimen263
+\tikzsiblingdistance=\dimen264
+\tikz@figbox=\box60
+\tikz@figbox@bg=\box61
+\tikz@tempbox=\box62
+\tikz@tempbox@bg=\box63
+\tikztreelevel=\count299
+\tikznumberofchildren=\count300
+\tikznumberofcurrentchild=\count301
+\tikz@fig@count=\count302
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/modules\pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+\pgfmatrixcurrentrow=\count303
+\pgfmatrixcurrentcolumn=\count304
+\pgf@matrix@numberofcolumns=\count305
+)
+\tikz@expandcount=\count306
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2025-08-29 v3.1.11a (3.1.11a)
+))) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty
+Package: verbatim 2024-01-22 v1.5x LaTeX2e package for verbatim enhancements
+\every@verbatim=\toks34
+\verbatim@line=\toks35
+\verbatim@in@stream=\read3
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/environ\environ.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/trimspaces\trimspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+)
+\@envbody=\toks36
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count307
+)
+\tcb@titlebox=\box64
+\tcb@upperbox=\box65
+\tcb@lowerbox=\box66
+\tcb@phantombox=\box67
+\c@tcbbreakpart=\count308
+\c@tcblayer=\count309
+\c@tcolorbox@number=\count310
+\l__tcobox_tmpa_box=\box68
+\l__tcobox_tmpa_dim=\dimen265
+\tcb@temp=\box69
+\tcb@temp=\box70
+\tcb@temp=\box71
+\tcb@temp=\box72
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count311
+\lst@gtempboxa=\box73
+\lst@token=\toks37
+\lst@length=\count312
+\lst@currlwidth=\dimen266
+\lst@column=\count313
+\lst@pos=\count314
+\lst@lostspace=\dimen267
+\lst@width=\dimen268
+\lst@newlines=\count315
+\lst@lineno=\count316
+\lst@maxwidth=\dimen269
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstpatch.sty
+File: lstpatch.sty 2024/09/23 1.10c (Carsten Heinz)
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/listings\lstmisc.sty
+File: lstmisc.sty 2024/09/23 1.10c (Carsten Heinz)
+\c@lstnumber=\count317
+\lst@skipnumbers=\count318
+\lst@framebox=\box74
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/listings\listings.cfg
+File: listings.cfg 2024/09/23 1.10c listings configuration
+))
+Package: listings 2024/09/23 1.10c (Carsten Heinz)
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdftex.def
+File: l3backend-pdftex.def 2025-06-09 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count319
+)
+No file DMG_Project_Template.aux.
+\openout1 = `DMG_Project_Template.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 23.
+LaTeX Font Info:    ... okay on input line 23.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(72.26999pt, 452.9679pt, 72.26999pt)
+* v-part:(T,H,B)=(72.26999pt, 700.50687pt, 72.26999pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=452.9679pt
+* \textheight=700.50687pt
+* \oddsidemargin=0.0pt
+* \evensidemargin=0.0pt
+* \topmargin=-37.0pt
+* \headheight=36.0pt
+* \headsep=18.0pt
+* \topskip=12.0pt
+* \footskip=30.0pt
+* \marginparwidth=35.0pt
+* \marginparsep=10.0pt
+* \columnsep=10.0pt
+* \skip\footins=10.8pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count320
+\scratchdimen=\dimen270
+\scratchbox=\box75
+\nofMPsegments=\count321
+\nofMParguments=\count322
+\everyMPshowfont=\toks38
+\MPscratchCnt=\count323
+\MPscratchDim=\dimen271
+\MPnumerator=\count324
+\makeMPintoPDFobject=\count325
+\everyMPtoPDFconversion=\toks39
+) (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+\c@lstlisting=\count326
+<Figures/UM6Plogo.png, id=4, 1204.5pt x 822.07124pt>
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 26.
+(pdftex.def)             Requested size: 113.24197pt x 77.28223pt.
+<Figures/CC.jpg, id=6, 475.7775pt x 360.34625pt>
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 27.
+(pdftex.def)             Requested size: 113.24197pt x 85.76457pt.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 40.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 40.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 40.
+
+
+[1
+
+{C:/Users/hgbfy/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map} <./Figures/UM6Plogo.png> <./Figures/CC.jpg>]
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 88.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 88.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[2
+
+]
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 175.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 175.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[3]
+c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex:208: Undefined control sequence.
+l.208 \text
+           {CAID} \rightarrow \text{all Patient, Staff, Department, Hospital...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex:208: Undefined control sequence.
+l.208 \text{CAID} \rightarrow \text
+                                   {all Patient, Staff, Department, Hospital...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 249.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 249.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[4]
+LaTeX Font Info:    Trying to load font information for OMS+cmr on input line 319.
+ (C:\Users\hgbfy\AppData\Local\Programs\MiKTeX\tex/latex/base\omscmr.fd
+File: omscmr.fd 2024/11/19 v2.5n Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 319.
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 340.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 340.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[5]
+c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex:342: Undefined control sequence.
+l.342     \item \{IID, CLID\} $\rightarrow$ \text
+                                                 {relationship attributes}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex:356: Undefined control sequence.
+l.356     \item \{IID, InsID\} $\rightarrow$ \text
+                                                  {relationship attributes}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex:357: Undefined control sequence.
+l.357     \item \{IID, InsID\} $\rightarrow$ \text
+                                                  {Patient attributes, Insur...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+c:/Users/hgbfy/Desktop/S3/Data/QueryMasters/Normalization And SQL Implementation/DMG_Project_Template.tex:371: Undefined control sequence.
+l.371 ...{STAFF\_ID, DEP\_ID\} $\rightarrow$ \text
+                                                  {relationship attributes}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 400.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 400.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[6]
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 446.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 446.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[7]
+Overfull \hbox (10.15733pt too wide) in paragraph at lines 456--456
+[]    \OT1/cmtt/m/n/12 Status ENUM('Scheduled', 'Completed', 'Cancelled') DEFAULT 'Scheduled',[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 494.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 494.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[8]
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 542.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 542.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[9]
+Overfull \hbox (28.68234pt too wide) in paragraph at lines 545--545
+[]\OT1/cmtt/m/n/12 INSERT INTO Patient (IID, CIN, FullName, Birth, Sex, BloodGroup, Phone) VALUES[] 
+ []
+
+
+Overfull \hbox (10.15733pt too wide) in paragraph at lines 546--546
+[]\OT1/cmtt/m/n/12 (1, 'AB234567', 'Amina Benjelloun', '1985-03-15', 'F', 'O+', '0661234567'),[] 
+ []
+
+
+Overfull \hbox (10.15733pt too wide) in paragraph at lines 547--547
+[]\OT1/cmtt/m/n/12 (2, 'CD789012', 'Youssef El Alami', '1978-11-22', 'M', 'A+', '0677890123'),[] 
+ []
+
+
+Overfull \hbox (3.98233pt too wide) in paragraph at lines 550--550
+[]\OT1/cmtt/m/n/12 (5, 'IJ567890', 'Khadija Bennani', '1988-09-12', 'F', 'O-', '0623456789');[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 590.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 590.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[10]
+Overfull \hbox (22.50734pt too wide) in paragraph at lines 611--611
+[]\OT1/cmtt/m/n/12 INSERT INTO ClinicalActivity (CAID, IID, STAFF_ID, DEP_ID, Date, Time) VALUES[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 638.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 638.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[11]
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 686.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 686.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[12]
+Overfull \hbox (207.75743pt too wide) in paragraph at lines 688--688
+[]\OT1/cmtt/m/n/12 INSERT INTO Medication (MID, Name, Form, Strength, ActiveIngredient, TherapeuticClass, Manufacturer) VALUES[] 
+ []
+
+
+Overfull \hbox (47.20735pt too wide) in paragraph at lines 689--689
+[]\OT1/cmtt/m/n/12 (1, 'Parac^^Setamol', 'Comprim^^Se', '500mg', 'Parac^^Setamol', 'Analg^^Sesique', 'Sothema'),[] 
+ []
+
+
+Overfull \hbox (65.73236pt too wide) in paragraph at lines 690--690
+[]\OT1/cmtt/m/n/12 (2, 'Amoxicilline', 'G^^Selule', '500mg', 'Amoxicilline', 'Antibiotique', 'Laprophan'),[] 
+ []
+
+
+Overfull \hbox (226.28244pt too wide) in paragraph at lines 691--691
+[]\OT1/cmtt/m/n/12 (3, 'Aspirine', 'Comprim^^Se', '100mg', 'Acide ac^^Setylsalicylique', 'Antiagr^^Segant plaquettaire', 'Cooper Pharma'),[] 
+ []
+
+
+Overfull \hbox (152.1824pt too wide) in paragraph at lines 692--692
+[]\OT1/cmtt/m/n/12 (4, 'Om^^Seprazole', 'G^^Selule', '20mg', 'Om^^Seprazole', 'Inhibiteur de la pompe ^^Ra protons', 'Pharma 5'),[] 
+ []
+
+
+Overfull \hbox (96.60738pt too wide) in paragraph at lines 693--693
+[]\OT1/cmtt/m/n/12 (5, 'Ciprofloxacine', 'Comprim^^Se', '500mg', 'Ciprofloxacine', 'Antibiotique', 'Galenica');[] 
+ []
+
+
+Overfull \hbox (47.20735pt too wide) in paragraph at lines 695--695
+[]\OT1/cmtt/m/n/12 INSERT INTO Stock (HID, MID, StockTimestamp, UnitPrice, Qty, ReorderLevel) VALUES[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 734.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 734.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[13]
+Overfull \hbox (115.13239pt too wide) in paragraph at lines 737--737
+[]\OT1/cmtt/m/n/12 INSERT INTO ContactLocation (CLID, City, Province, Street, Number, PostalCode, Phone) VALUES[] 
+ []
+
+
+Overfull \hbox (65.73236pt too wide) in paragraph at lines 738--738
+[]\OT1/cmtt/m/n/12 (1, 'Casablanca', 'Casablanca', 'Boulevard Zerktouni', '45', '20000', '0522234567'),[] 
+ []
+
+
+Overfull \hbox (34.85735pt too wide) in paragraph at lines 741--741
+[]\OT1/cmtt/m/n/12 (4, 'Marrakech', 'Marrakech', 'Avenue Hassan II', '23', '40000', '0524345678'),[] 
+ []
+
+
+Overfull \hbox (3.98233pt too wide) in paragraph at lines 742--742
+[]\OT1/cmtt/m/n/12 (5, 'Tanger', 'Tanger', 'Boulevard Pasteur', '56', '90000', '0539456789');[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 782.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 782.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[14]
+Overfull \hbox (47.20735pt too wide) in paragraph at lines 791--791
+[] \OT1/cmtt/m/n/12 and CA.date between current_date() and date_add(current_date(), interval 7 day);[] 
+ []
+
+
+Overfull \hbox (121.30739pt too wide) in paragraph at lines 807--807
+[]\OT1/cmtt/m/n/12 (SELECT D.HID FROM Department D  JOIN ClinicalActivity C ON D.DEP_ID=C.DEP_ID WHERE C.CAID IN[] 
+ []
+
+
+Overfull \hbox (170.70741pt too wide) in paragraph at lines 811--811
+[]\OT1/cmtt/m/n/12 --  8.Find medications in the therapeutic class Antibiotic where the unit price is below two hundred.[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 830.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 830.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[15]
+Overfull \hbox (28.68234pt too wide) in paragraph at lines 846--846
+[]     \OT1/cmtt/m/n/12 WHERE c.DEP_ID = d.DEP_ID AND a.status = 'Scheduled') AS Scheduled_Count,[] 
+ []
+
+
+Overfull \hbox (28.68234pt too wide) in paragraph at lines 849--849
+[]     \OT1/cmtt/m/n/12 WHERE c.DEP_ID = d.DEP_ID AND a.status = 'Completed') AS Completed_Count,[] 
+ []
+
+
+Overfull \hbox (22.50734pt too wide) in paragraph at lines 852--852
+[]     \OT1/cmtt/m/n/12 WHERE c.DEP_ID = d.DEP_ID AND a.status = 'Cancelled') AS Cancelled_Count[] 
+ []
+
+
+Overfull \hbox (127.48239pt too wide) in paragraph at lines 864--864
+[]              \OT1/cmtt/m/n/12 and CA.date between current_date() and date_add(current_date(), interval 30 day)[] 
+ []
+
+
+Overfull \hbox (10.15733pt too wide) in paragraph at lines 867--867
+[]\OT1/cmtt/m/n/12 SELECT  CA.STAFF_ID, H.HID AS Hospital_Id,  COUNT(*) AS Staff_Appointments,[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 878.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 878.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[16]
+Overfull \hbox (195.40742pt too wide) in paragraph at lines 891--891
+[]\OT1/cmtt/m/n/12 HAVING COUNT(DISTINCT M.MID )=(SELECT COUNT(*) FROM  Medication M WHERE M.TherapeuticClass='antibiotic');[] 
+ []
+
+
+Overfull \hbox (380.65752pt too wide) in paragraph at lines 893--893
+[]\OT1/cmtt/m/n/12 -- 15. For each hospital and drug class return the average unit price and flag whether it is above the citywide average for that class.[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 926.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 926.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[17]
+Overfull \hbox (59.55736pt too wide) in paragraph at lines 958--958
+[]\OT1/cmtt/m/n/12 SELECT  S.MID, H.City, MIN(S.UnitPrice) AS min_price, MAX(S.UnitPrice) AS max_price[] 
+ []
+
+
+Overfull \hbox (22.50734pt too wide) in paragraph at lines 962--962
+[]\OT1/cmtt/m/n/12 HAVING (MAX(S.UnitPrice) - MIN(S.UnitPrice)) * 100.0 / MIN(S.UnitPrice) > 30;[] 
+ []
+
+
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 972.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 972.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[18]
+
+File: Figures/UM6Plogo.png Graphic file (type png)
+<use Figures/UM6Plogo.png>
+Package pdftex.def Info: Figures/UM6Plogo.png  used on input line 979.
+(pdftex.def)             Requested size: 58.88803pt x 40.19026pt.
+File: Figures/CC.jpg Graphic file (type jpg)
+<use Figures/CC.jpg>
+Package pdftex.def Info: Figures/CC.jpg  used on input line 979.
+(pdftex.def)             Requested size: 58.88803pt x 44.5978pt.
+
+Package fancyhdr Warning: \headheight is too small (36.0pt): 
+(fancyhdr)                Make it at least 48.94783pt, for example:
+(fancyhdr)                \setlength{\headheight}{48.94783pt}.
+(fancyhdr)                You might also make \topmargin smaller:
+(fancyhdr)                \addtolength{\topmargin}{-12.94783pt}.
+
+[19] (DMG_Project_Template.aux)
+ ***********
+LaTeX2e <2025-06-01> patch level 1
+L3 programming layer <2025-09-02>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 16492 strings out of 468130
+ 344252 string characters out of 5430633
+ 733271 words of memory out of 5000000
+ 44882 multiletter control sequences out of 15000+600000
+ 632191 words of font info for 58 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 98i,16n,105p,764b,616s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ <C:\Users\hgbfy\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\tcrm1200.pk><C:/Users/hgbfy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Users/hgbfy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Users/hgbfy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Users/hgbfy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/hgbfy/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on DMG_Project_Template.pdf (19 pages, 189232 bytes).
+PDF statistics:
+ 101 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 23 words of extra memory for PDF output out of 10000 (max. 10000000)
+
