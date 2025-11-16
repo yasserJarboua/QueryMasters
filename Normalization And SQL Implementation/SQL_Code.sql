@@ -442,8 +442,8 @@ SELECT
     m.Manufacturer
 FROM Medication m
 JOIN Stock s ON m.MID = s.MID
-WHERE m.TherapeuticClass = 'Antibiotic'
-  AND m.UnitPrice < 200;
+WHERE m.TherapeuticClass = 'Antibiotique'
+  AND s.UnitPrice < 200;
 
 -- 9. For each hospital list the top three most expensive medications.
 SELECT H.Name AS HospitalName, M.Name AS MedicationName, S.UnitPrice
