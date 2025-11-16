@@ -504,7 +504,7 @@ GROUP BY H.HID, CA.STAFF_ID;
 -- query 13
 SELECT M.Name AS Medication, H.Name AS Hospital
 FROM Hospital H, Stock S, Medication M
-WHERE H.HID = S.HID AND M.MID = S.MID AND S.Qty < S.OrderLevel;
+WHERE H.HID = S.HID AND M.MID = S.MID AND S.Qty < S.ReorderLevel;
 
 -- query 14 
 SELECT H.*  FROM Hospital H 
