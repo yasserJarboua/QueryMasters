@@ -399,9 +399,9 @@ SELECT DISTINCT Type
 FROM  Insurance ;
 
 -- 3
-SELECT DISTINCT s.STAFF_ID, s.Name
+SELECT DISTINCT s.STAFF_ID, s.FullName
 FROM Staff s
-JOIN WorkIn w ON s.STAFF_ID = w.STAFF_ID
+JOIN Work_in w ON s.STAFF_ID = w.STAFF_ID
 JOIN Department d ON w.Dep_ID = d.DEP_ID
 JOIN Hospital h ON d.HID = h.HID
 WHERE h.City = 'Rabat';
