@@ -1,69 +1,26 @@
-// Load patients when page loads
 document.addEventListener('DOMContentLoaded', function() {
-    loadPatients();
+    fetchPatients();
 });
 
-// Fetch patients from API
-async function loadPatients() {
-    const loading = document.getElementById('loading');
-    const error = document.getElementById('error');
-    const tableBody = document.getElementById('patients-table-body');
-    
+async function fetchPatients() {
     try {
-        loading.style.display = 'block';
-        error.style.display = 'none';
-        
-        // Call your Flask API endpoint
+        // Calls your Python: @app.route('/api/patients')
         const response = await fetch('/api/patients?limit=50');
-        
-        if (!response.ok) {
-            throw new Error('Failed to fetch patients');
-        }
-        
         const data = await response.json();
+        const tbody = document.getElementById('patients-table-body');
+        tbody.innerHTML = ''; // Clear loading text
         
-        // Clear existing data
-        tableBody.innerHTML = '';
-        
-        // Populate table
         data.forEach(patient => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${patient.IID}</td>
-                <td>${patient.FullName}</td>
-                <td>
-                    <button onclick="viewPatient('${patient.IID}')" class="btn btn-small">View</button>
-                    <button onclick="editPatient('${patient.IID}')" class="btn btn-small">Edit</button>
-                </td>
+            // Note: Adjust indices [0], [1] based on your database tuple order
+            // Or use patient.ColumnName if your DB returns a dictionary
+            const row = `
+                <tr>
+                    <td>${patient["FullName"]}</td> <td>${patient['Sex']}</td><td>${patient["Phone"]}</td>
+                </tr>
             `;
-            tableBody.appendChild(row);
+            tbody.innerHTML += row;
         });
-        
-    } catch (err) {
-        error.textContent = 'Error loading patients: ' + err.message;
-        error.style.display = 'block';
-    } finally {
-        loading.style.display = 'none';
+    } catch (error) {
+        console.error('Error:', error);
     }
-}
-
-// Search functionality
-function searchPatients() {
-    const searchValue = document.getElementById('searchInput').value.toLowerCase();
-    const rows = document.querySelectorAll('#patients-table-body tr');
-    
-    rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(searchValue) ? '' : 'none';
-    });
-}
-
-// View patient details
-function viewPatient(iid) {
-    window.location.href = `/patients/${iid}`;
-}
-
-// Edit patient
-function editPatient(iid) {
-    window.location.href = `/patients/${iid}/edit`;
 }

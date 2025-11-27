@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Staff Analytics</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Staff Name</th>
+                <th>Hospital</th>
+                <th>Total Appointments</th>
+                <th>Share %</th>
+            </tr>
+        </thead>
+        <tbody id="staff-table-body"></tbody>
+    </table>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/staff.js') }}"></script>
+{% endblock %}

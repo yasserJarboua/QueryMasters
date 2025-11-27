@@ -1,41 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}Patients List{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-{% endblock %}
-
 {% block content %}
-<div class="page-header">
-    <h1>Patients</h1>
-    <a href="/patients/add" class="btn btn-primary">Add New Patient</a>
-</div>
+    <div class="header-flex">
+        <h1>Patients Directory</h1>
+        <a href="/patients/add" class="btn">Add New Patient</a>
+    </div>
 
-<div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search patients...">
-    <button onclick="searchPatients()">Search</button>
-</div>
-
-<div id="patients-container">
     <table class="data-table">
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Full Name</th>
-                <th>Actions</th>
+                <th>Sex</th>
+                <th>Phone</th>
             </tr>
         </thead>
         <tbody id="patients-table-body">
-            <!-- Data will be loaded here by JavaScript -->
         </tbody>
     </table>
-</div>
-
-<div id="loading" class="loading">Loading...</div>
-<div id="error" class="error" style="display: none;"></div>
 {% endblock %}
 
 {% block extra_js %}
-<script src="{{ url_for('static', filename='js/patients.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/patients.js') }}"></script>
 {% endblock %}

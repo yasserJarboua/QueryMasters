@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="sidebar">
+        <div class="brand">QueryMasters</div>
+        <ul>
+            <li><a href="/">🏠 Dashboard</a></li>
+            <li><a href="/patients">👥 Patients List</a></li>
+            <li><a href="/patients/add">➕ Add Patient</a></li>
+            <li><a href="/staff/share">📊 Staff Analytics</a></li>
+            <li><a href="/inventory/low-stock">⚠️ Low Stock</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

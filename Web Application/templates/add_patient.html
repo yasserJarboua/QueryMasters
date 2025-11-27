@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Register New Patient</h1>
+    
+    <div class="form-container">
+        <form id="addPatientForm">
+            <div class="form-group">
+                <label>IID (ID):</label>
+                <input type="number" id="iid" required>
+            </div>
+            <div class="form-group">
+                <label>CIN:</label>
+                <input type="text" id="cin" required>
+            </div>
+            <div class="form-group">
+                <label>Full Name:</label>
+                <input type="text" id="full_name" required>
+            </div>
+            <div class="form-group">
+                <label>Birth Date:</label>
+                <input type="date" id="birth" required>
+            </div>
+            <div class="form-group">
+                <label>Sex (M/F):</label>
+                <select id="sex">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Blood Type:</label>
+                <input type="text" id="blood" placeholder="e.g. O+">
+            </div>
+            <div class="form-group">
+                <label>Phone:</label>
+                <input type="tel" id="phone" required>
+            </div>
+
+            <button type="submit" class="btn">Save Patient</button>
+            <p id="message" class="message"></p>
+        </form>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/add_patient.js') }}"></script>
+{% endblock %}

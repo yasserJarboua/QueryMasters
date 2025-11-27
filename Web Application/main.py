@@ -70,7 +70,7 @@ def api_add_patient():
 def api_staff_share():
     try:
         result = get_staff_share()
-        return result
+        return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -78,7 +78,7 @@ def api_staff_share():
 def api_low_stock():
     try:
         result = get_low_stock()
-        return result
+        return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

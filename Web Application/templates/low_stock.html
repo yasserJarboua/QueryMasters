@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Low Stock Alert ⚠️</h1>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th>Hospital</th>
+                <th>Medication</th>
+                <th>Current Qty</th>
+                <th>Reorder Level</th>
+            </tr>
+        </thead>
+        <tbody id="stock-table-body"></tbody>
+    </table>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
+{% endblock %}

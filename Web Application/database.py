@@ -27,7 +27,7 @@ def init_db(app):
 
 def list_patients_ordered_by_last_name(limit=20):
     query = db.text(f"""
-    SELECT IID, FullName
+    SELECT IID, FullName, Sex, Phone
     FROM Patient 
     ORDER BY SUBSTRING_INDEX(FullName, ' ', -1), FullName
     LIMIT {limit}
@@ -36,7 +36,9 @@ def list_patients_ordered_by_last_name(limit=20):
     res = [
         {
             "IID": patient[0],
-            "FullName": patient[1]
+            "FullName": patient[1],
+            "Sex": patient[2],
+            "Phone": patient[3],
         }
         for patient in result
     ]
@@ -109,15 +111,15 @@ def get_low_stock():
     try:
         result = db.session.execute(query).fetchall()
         res = [
-        {
-            "HID": row[0],
-            "HospitalName": row[1],
-            "MID" : row[2],
-            "Medication Name": row[3],
-            "Quantity" : row[4],
-            "Reorder Level" : row[5]
-        }
-        for row in result
+            {
+                "HID": row[0],
+                "HospitalName": row[1],
+                "MID" : row[2],
+                "Medication Name": row[3],
+                "Quantity" : row[4],
+                "Reorder Level" : row[5]
+            }
+            for row in result
         ]
         return res
     except Exception as e:
@@ -170,7 +172,7 @@ def get_staff_share():
             for row in result
         ]
         
-        return jsonify(res)
+        return res
     except Exception as e:
         db.session.rollback()
         raise Exception(f"Operation Failed: {e}")
