@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospital System</title>
+    <title>MNHS Hospital System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <nav class="sidebar">
-        <div class="brand">QueryMasters</div>
+        <div class="brand">MNHS Database</div>
         <ul>
-            <li><a href="/">🏠 Dashboard</a></li>
-            <li><a href="/patients">👥 Patients List</a></li>
-            <li><a href="/patients/add">➕ Add Patient</a></li>
-            <li><a href="/staff/share">📊 Staff Analytics</a></li>
-            <li><a href="/inventory/low-stock">⚠️ Low Stock</a></li>
+            <li><a href="/dashboard" id="nav-dashboard">Dashboard</a></li>
+            <li><a href="/patients" id="nav-patients">Patients List</a></li>
+            <li><a href="/patients/add" id="nav-add-patient">Add Patient</a></li>
+            <li><a href="/staff/share" id="nav-staff">Staff Analytics</a></li>
+            <li><a href="/inventory/low-stock" id="nav-inventory">Low Stock</a></li>
         </ul>
     </nav>
 
@@ -22,6 +22,21 @@
         {% block content %}{% endblock %}
     </main>
 
+    <script>
+        // Highlight active navigation link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navLinks = document.querySelectorAll('.sidebar a');
+            
+            navLinks.forEach(link => {
+                const linkPath = new URL(link.href).pathname;
+                if (currentPath === linkPath) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+    
     {% block extra_js %}{% endblock %}
 </body>
 </html>

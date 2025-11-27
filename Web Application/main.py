@@ -15,6 +15,10 @@ init_db(app)
 def base():
     return render_template('base.html')
 
+@app.route('/dashboard')
+def dashboard():
+    return render_template('dashboard.html')
+
 @app.route('/patients')
 def patients_page():
     return render_template('patients.html')
@@ -79,6 +83,36 @@ def api_low_stock():
     try:
         result = get_low_stock()
         return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+@app.route("/api/dashboard/stats")
+def api_dashboard_stats():
+    try:
+        stats = get_dashboard_stats()
+        return jsonify(stats)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# === Recent Patients ===
+@app.route("/api/dashboard/recent-patients")
+def api_recent_patients():
+    try:
+        limit = request.args.get("limit", 5, type=int)
+        patients = get_recent_patients(limit)
+        return jsonify(patients)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# === Critical Low Stock Items ===
+@app.route("/api/dashboard/critical-stock")
+def api_critical_stock():
+    try:
+        limit = request.args.get("limit", 5, type=int)
+        items = get_critical_stock_items(limit)
+        return jsonify(items)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

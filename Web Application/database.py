@@ -176,3 +176,128 @@ def get_staff_share():
     except Exception as e:
         db.session.rollback()
         raise Exception(f"Operation Failed: {e}")
+    
+## Dashboard related code:
+
+def get_dashboard_stats():
+    """
+    Dashboard statistics:
+    - Total patients
+    - Total staff
+    - Total appointments
+    - Low-stock count
+    """
+    stats = {}
+
+    try:
+        # Total patients
+        result = db.session.execute(db.text("SELECT COUNT(*) AS count FROM Patient"))
+        stats["total_patients"] = result.scalar()
+
+        # Total staff
+        result = db.session.execute(db.text("SELECT COUNT(*) AS count FROM Staff"))
+        stats["total_staff"] = result.scalar()
+
+        # Total appointments
+        result = db.session.execute(db.text("SELECT COUNT(*) AS count FROM Appointment"))
+        stats["total_appointments"] = result.scalar()
+
+        # Low stock items
+        result = db.session.execute(db.text("""
+            SELECT COUNT(*) AS count
+            FROM Stock
+            WHERE Qty < ReorderLevel
+        """))
+        stats["low_stock_count"] = result.scalar()
+
+        return stats
+
+    except Exception as e:
+        raise Exception(f"Operation Failed: {e}")
+
+def get_recent_patients(limit=5):
+    """
+    Get most recently added patients.
+    (Assuming IID is an auto-increment or chronological key)
+    """
+    query = db.text(f"""
+        SELECT IID, FullName, Sex, Phone, Birth
+        FROM Patient
+        ORDER BY IID DESC
+        LIMIT {limit}
+    """)
+
+    result = db.session.execute(query).fetchall()
+
+    return [
+        {
+            "IID": row.IID,
+            "FullName": row.FullName,
+            "Sex": row.Sex,
+            "Phone": row.Phone,
+            "Birth": row.Birth
+        }
+        for row in result
+    ]
+
+
+def get_upcoming_appointments(limit=5):
+    """
+    Get upcoming appointments with patient + staff names.
+    Uses ClinicalActivity for scheduling.
+    """
+    query = db.text(f"""
+        SELECT
+            a.CAID AS AppointmentID,
+            p.FullName AS PatientName,
+            s.FullName AS StaffName,
+            a.Reason
+        FROM Appointment a
+        JOIN ClinicalActivity c ON c.CAID = a.CAID
+        JOIN Patient p ON p.IID = c.IID
+        JOIN Staff s ON s.STAFF_ID = c.STAFF_ID
+        ORDER BY c.Date, c.Time
+        LIMIT {limit}
+    """)
+
+    result = db.session.execute(query).fetchall()
+
+    return [
+        {
+            "AppointmentID": row.AppointmentID,
+            "PatientName": row.PatientName,
+            "StaffName": row.StaffName,
+            "Reason": row.Reason
+        }
+        for row in result
+    ]
+
+def get_critical_stock_items(limit=5):
+    """
+    Get low stock items sorted by severity.
+    """
+    query = db.text(f"""
+        SELECT
+            h.Name AS HospitalName,
+            m.Name AS MedicationName,
+            s.Qty AS Quantity,
+            s.ReorderLevel
+        FROM Stock s
+        JOIN Hospital h ON h.HID = s.HID
+        JOIN Medication m ON m.MID = s.MID
+        WHERE s.Qty < s.ReorderLevel
+        ORDER BY (s.ReorderLevel - s.Qty) DESC
+        LIMIT {limit}
+    """)
+
+    result = db.session.execute(query).fetchall()
+
+    return [
+        {
+            "HospitalName": row.HospitalName,
+            "MedicationName": row.MedicationName,
+            "Quantity": row.Quantity,
+            "ReorderLevel": row.ReorderLevel
+        }
+        for row in result
+    ]

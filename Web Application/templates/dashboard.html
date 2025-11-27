@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="dashboard-container">
+
+    <!-- ===================== TOP STAT CARDS ===================== -->
+    <div class="cards-container">
+
+        <div class="card">
+            <div class="stat-title">Total Patients</div>
+            <div class="stat-number" id="total-patients">0</div>
+        </div>
+
+        <div class="card">
+            <div class="stat-title">Total Staff</div>
+            <div class="stat-number" id="total-staff">0</div>
+        </div>
+
+        <div class="card">
+            <div class="stat-title">Appointments</div>
+            <div class="stat-number" id="total-appointments">0</div>
+        </div>
+
+        <div class="card">
+            <div class="stat-title">Low Stock Items</div>
+            <div class="stat-number" id="low-stock-count">0</div>
+        </div>
+
+    </div>
+</br>
+    <!-- ===================== BOTTOM GRID ===================== -->
+    <div class="bottom-grid">
+
+        <!-- Recent Patients -->
+        <div class="panel">
+            <h2 class="panel-title">Recent Patients</h2>
+            <div id="recent-patients-list" class="panel-list">
+                <p class="panel-placeholder">Loading...</p>
+            </div>
+        </div>
+
+        <!-- Critical Stock -->
+        <div class="panel">
+            <h2 class="panel-title">Critical Stock Items</h2>
+            <div id="critical-stock-list" class="panel-list">
+                <p class="panel-placeholder">Loading...</p>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %}
