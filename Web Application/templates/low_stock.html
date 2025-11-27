@@ -1,17 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Low Stock Alert ⚠️</h1>
+    <h1>Low Stock Alert</h1>
+    
+    <div style="background: var(--bg-card); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); margin-bottom: 1.5rem;">
+        <p style="color: var(--text-muted); margin: 0;">
+            Items below their reorder level, organized by hospital
+        </p>
+    </div>
+    
     <table class="data-table">
         <thead>
             <tr>
-                <th>Hospital</th>
                 <th>Medication</th>
-                <th>Current Qty</th>
+                <th>Current Quantity</th>
                 <th>Reorder Level</th>
+                <th>Action Required</th>
             </tr>
         </thead>
-        <tbody id="stock-table-body"></tbody>
+        <tbody id="stock-table-body">
+            <tr>
+                <td colspan="4" class="loading">Loading...</td>
+            </tr>
+        </tbody>
     </table>
 {% endblock %}
 

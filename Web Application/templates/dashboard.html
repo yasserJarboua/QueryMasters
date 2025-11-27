@@ -2,40 +2,83 @@
 
 {% block content %}
 <div class="dashboard-container">
+    <h1>Hospital Dashboard</h1>
 
-    <!-- ===================== TOP STAT CARDS ===================== -->
+    <!-- Top Statistics Cards -->
     <div class="cards-container">
-
-        <div class="card">
+        <div class="card" style="border-top: 3px solid #5b8dd6;">
             <div class="stat-title">Total Patients</div>
-            <div class="stat-number" id="total-patients">0</div>
+            <div class="stat-number" id="total-patients">-</div>
+            <div style="margin-top: 0.5rem; font-size: 0.8125rem; color: var(--text-muted);">
+                Registered in system
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="border-top: 3px solid #58a182;">
             <div class="stat-title">Total Staff</div>
-            <div class="stat-number" id="total-staff">0</div>
+            <div class="stat-number" id="total-staff">-</div>
+            <div style="margin-top: 0.5rem; font-size: 0.8125rem; color: var(--text-muted);">
+                Active medical staff
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="border-top: 3px solid #9b8ad6;">
             <div class="stat-title">Appointments</div>
-            <div class="stat-number" id="total-appointments">0</div>
+            <div class="stat-number" id="total-appointments">-</div>
+            <div style="margin-top: 0.5rem; font-size: 0.8125rem; color: var(--text-muted);">
+                Total scheduled
+            </div>
         </div>
 
-        <div class="card">
+        <div class="card" style="border-top: 3px solid #d4905d;">
             <div class="stat-title">Low Stock Items</div>
-            <div class="stat-number" id="low-stock-count">0</div>
+            <div class="stat-number" id="low-stock-count">-</div>
+            <div style="margin-top: 0.5rem; font-size: 0.8125rem; color: var(--text-muted);">
+                Require reordering
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts Row -->
+    <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <!-- Appointments Trend Chart -->
+        <div class="chart-container">
+            <h3 class="chart-title">Appointments Overview (Last 6 Months)</h3>
+            <canvas id="appointmentsChart"></canvas>
         </div>
 
+        <!-- Gender Distribution Chart -->
+        <div class="chart-container">
+            <h3 class="chart-title">Patient Gender Distribution</h3>
+            <canvas id="genderChart"></canvas>
+        </div>
     </div>
-</br>
-    <!-- ===================== BOTTOM GRID ===================== -->
-    <div class="bottom-grid">
 
+    <!-- Second Charts Row -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+        <!-- Staff Distribution Chart -->
+        <div class="chart-container">
+            <h3 class="chart-title">Staff by Department</h3>
+            <canvas id="staffChart"></canvas>
+        </div>
+
+        <!-- Stock Status Chart -->
+        <div class="chart-container">
+            <h3 class="chart-title">Inventory Stock Levels</h3>
+            <canvas id="stockChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Data Tables Row -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
         <!-- Recent Patients -->
         <div class="panel">
             <h2 class="panel-title">Recent Patients</h2>
             <div id="recent-patients-list" class="panel-list">
-                <p class="panel-placeholder">Loading...</p>
+                <div class="loading">Loading patients...</div>
+            </div>
+            <div style="margin-top: 1rem; text-align: center;">
+                <a href="/patients" class="btn btn-secondary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">View All Patients</a>
             </div>
         </div>
 
@@ -43,15 +86,39 @@
         <div class="panel">
             <h2 class="panel-title">Critical Stock Items</h2>
             <div id="critical-stock-list" class="panel-list">
-                <p class="panel-placeholder">Loading...</p>
+                <div class="loading">Loading stock data...</div>
+            </div>
+            <div style="margin-top: 1rem; text-align: center;">
+                <a href="/inventory/low-stock" class="btn btn-secondary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">View All Stock</a>
             </div>
         </div>
-
     </div>
 
+    <!-- Top Performing Staff -->
+    <div class="panel" style="margin-bottom: 1.5rem;">
+        <h2 class="panel-title">Top Performing Staff (by Appointment Count)</h2>
+        <div id="top-staff-list">
+            <div class="loading">Loading staff data...</div>
+        </div>
+        <div style="margin-top: 1rem; text-align: center;">
+            <a href="/staff/share" class="btn btn-secondary" style="font-size: 0.875rem; padding: 0.5rem 1rem;">View Staff Analytics</a>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="panel">
+        <h2 class="panel-title">Quick Actions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <a href="/patients/add" class="btn" style="text-decoration: none;">+ Add New Patient</a>
+            <a href="/appointments/schedule" class="btn" style="text-decoration: none;">📅 Schedule Appointment</a>
+            <a href="/patients" class="btn btn-secondary" style="text-decoration: none;">👥 View Patients</a>
+            <a href="/inventory/low-stock" class="btn btn-secondary" style="text-decoration: none;">📦 Check Inventory</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %}

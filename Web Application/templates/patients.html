@@ -6,6 +6,24 @@
         <a href="/patients/add" class="btn">Add New Patient</a>
     </div>
 
+    <!-- Controls Row -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; background: var(--bg-card); padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="color: var(--text-muted);">
+            Showing <span id="patient-count" style="font-weight: 600; color: var(--text-primary);">0</span> patients
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+            <label style="color: var(--text-secondary); font-weight: 500;">Show:</label>
+            <select id="limit-selector" style="padding: 0.5rem 1rem; background: var(--bg-primary); border: 1px solid var(--border-color); border-radius: 6px; color: var(--text-primary); cursor: pointer;">
+                <option value="10">10 patients</option>
+                <option value="20" selected>20 patients</option>
+                <option value="50">50 patients</option>
+                <option value="100">100 patients</option>
+                <option value="all">All patients</option>
+            </select>
+        </div>
+    </div>
+
     <table class="data-table">
         <thead>
             <tr>
@@ -15,6 +33,9 @@
             </tr>
         </thead>
         <tbody id="patients-table-body">
+            <tr>
+                <td colspan="3" class="loading">Loading patients...</td>
+            </tr>
         </tbody>
     </table>
 {% endblock %}

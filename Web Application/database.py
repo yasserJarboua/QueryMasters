@@ -301,3 +301,141 @@ def get_critical_stock_items(limit=5):
         }
         for row in result
     ]
+
+# Add these functions to your database.py file
+
+def get_gender_distribution():
+    """
+    Get patient gender distribution for pie chart
+    """
+    query = db.text("""
+        SELECT 
+            Sex,
+            COUNT(*) as count
+        FROM Patient
+        GROUP BY Sex
+    """)
+    
+    try:
+        result = db.session.execute(query).fetchall()
+        
+        data = {"male": 0, "female": 0}
+        for row in result:
+            if row.Sex == 'M':
+                data["male"] = row.count
+            elif row.Sex == 'F':
+                data["female"] = row.count
+        
+        return data
+    except Exception as e:
+        raise Exception(f"Operation Failed: {e}")
+
+
+def get_staff_distribution():
+    """
+    Get staff distribution by department for bar chart
+    """
+    query = db.text("""
+        SELECT 
+            d.Name as DepartmentName,
+            COUNT(DISTINCT c.STAFF_ID) as StaffCount
+        FROM Department d
+        LEFT JOIN ClinicalActivity c ON c.DEP_ID = d.DEP_ID
+        GROUP BY d.DEP_ID, d.Name
+        ORDER BY StaffCount DESC
+        LIMIT 10
+    """)
+    
+    try:
+        result = db.session.execute(query).fetchall()
+        
+        data = {
+            "departments": [],
+            "counts": []
+        }
+        
+        for row in result:
+            data["departments"].append(row.DepartmentName)
+            data["counts"].append(row.StaffCount)
+        
+        return data
+    except Exception as e:
+        raise Exception(f"Operation Failed: {e}")
+
+
+def get_stock_status():
+    """
+    Get stock status distribution for chart
+    """
+    query = db.text("""
+        SELECT 
+            CASE 
+                WHEN Qty = 0 THEN 'Critical'
+                WHEN Qty < ReorderLevel * 0.3 THEN 'Critical'
+                WHEN Qty < ReorderLevel * 0.6 THEN 'Low'
+                WHEN Qty < ReorderLevel THEN 'Normal'
+                ELSE 'High'
+            END as Status,
+            COUNT(*) as Count
+        FROM Stock
+        GROUP BY Status
+    """)
+    
+    try:
+        result = db.session.execute(query).fetchall()
+        
+        # Initialize with zeros
+        status_map = {
+            'Critical': 0,
+            'Low': 0,
+            'Normal': 0,
+            'High': 0
+        }
+        
+        for row in result:
+            if row.Status in status_map:
+                status_map[row.Status] = row.Count
+        
+        data = {
+            "levels": [
+                status_map['Critical'],
+                status_map['Low'],
+                status_map['Normal'],
+                status_map['High']
+            ]
+        }
+        
+        return data
+    except Exception as e:
+        raise Exception(f"Operation Failed: {e}")
+
+
+def get_appointments_by_month(months=6):
+    """
+    Get appointment counts for the last N months
+    """
+    query = db.text("""
+        SELECT 
+            DATE_FORMAT(Date, '%Y-%m') as Month,
+            COUNT(*) as Count
+        FROM ClinicalActivity
+        WHERE Date >= DATE_SUB(CURDATE(), INTERVAL :months MONTH)
+        GROUP BY Month
+        ORDER BY Month
+    """)
+    
+    try:
+        result = db.session.execute(query, {"months": months}).fetchall()
+        
+        data = {
+            "months": [],
+            "counts": []
+        }
+        
+        for row in result:
+            data["months"].append(row.Month)
+            data["counts"].append(row.Count)
+        
+        return data
+    except Exception as e:
+        raise Exception(f"Operation Failed: {e}")
