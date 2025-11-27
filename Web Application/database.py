@@ -2,8 +2,9 @@ import os
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask import jsonify
-load_dotenv()
 
+
+load_dotenv()
 db = SQLAlchemy()
 
 def get_database_config():

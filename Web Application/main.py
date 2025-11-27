@@ -6,16 +6,14 @@ from database import *
 
 app = Flask(__name__)
 
-load_dotenv()
-
 init_db(app)
 
 
 #The web application design code starts here
 
 @app.route('/')
-def index():
-    return render_template('index.html')
+def base():
+    return render_template('base.html')
 
 @app.route('/patients')
 def patients_page():
