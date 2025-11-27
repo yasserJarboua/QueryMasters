@@ -68,8 +68,8 @@ async function loadLowStock() {
             
             // Items for this hospital
             items.forEach(item => {
-                const deficit = item.ReorderLevel - item.Quantity;
-                const urgencyPercent = (item.Quantity / item.ReorderLevel) * 100;
+                const deficit = item['Reorder Level'] - item['Quantity'];
+                const urgencyPercent = (item['Quantity'] / item['Reorder Level']) * 100;
                 
                 let urgencyLevel = 'low';
                 let urgencyColor = '#d4905d';
@@ -92,7 +92,7 @@ async function loadLowStock() {
                     <tr style="background: ${urgencyBg};">
                         <td style="padding-left: 2rem;">
                             <div style="font-weight: 600; color: var(--text-primary);">
-                                ${item.MedicationName}
+                                ${item['Medication Name']}
                             </div>
                             <div style="font-size: 0.75rem; color: ${urgencyColor}; margin-top: 0.25rem; font-weight: 600;">
                                 ${urgencyText}
@@ -104,13 +104,13 @@ async function loadLowStock() {
                                     <div style="width: ${Math.max(urgencyPercent, 5)}%; height: 100%; background: ${urgencyColor}; transition: width 1s ease;"></div>
                                 </div>
                                 <div style="font-weight: 700; color: ${urgencyColor}; font-size: 1.125rem; min-width: 40px;">
-                                    ${item.Quantity}
+                                    ${item['Quantity']}
                                 </div>
                             </div>
                         </td>
                         <td>
                             <div style="font-weight: 600; color: var(--text-secondary); font-size: 1rem;">
-                                ${item.ReorderLevel}
+                                ${item['Reorder Level']}
                             </div>
                         </td>
                         <td>
