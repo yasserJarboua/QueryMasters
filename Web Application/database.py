@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
-
+from flask import jsonify
 load_dotenv()
 
 db = SQLAlchemy()
@@ -25,14 +25,21 @@ def init_db(app):
     return db
 
 def list_patients_ordered_by_last_name(limit=20):
-    query = db.text("""
+    query = db.text(f"""
     SELECT IID, FullName
     FROM Patient 
     ORDER BY SUBSTRING_INDEX(FullName, ' ', -1), FullName
-    LIMIT :limit
+    LIMIT {limit}
     """)
-    result = db.session.execute(query, {"limit": limit})
-    return result.fetchall()
+    result = db.session.execute(query).fetchall()
+    res = [
+        {
+            "IID": patient[0],
+            "FullName": patient[1]
+        }
+        for patient in result
+    ]
+    return res
         
 def insert_patient(iid, cin, full_name, birth, sex, blood, phone):
     query = db.text("""
@@ -97,10 +104,21 @@ def get_low_stock():
         JOIN Hospital h ON s.HID = h.HID
         WHERE COALESCE(s.Qty, 0) < COALESCE(s.ReorderLevel, 10)
         ORDER BY h.HID, m.Name
-    """)
+        """)
     try:
-        result = db.session.execute(query)
-        return result.fetchall()
+        result = db.session.execute(query).fetchall()
+        res = [
+        {
+            "HID": row[0],
+            "HospitalName": row[1],
+            "MID" : row[2],
+            "Medication Name": row[3],
+            "Quantity" : row[4],
+            "Reorder Level" : row[5]
+        }
+        for row in result
+        ]
+        return res
     except Exception as e:
         db.session.rollback()
         raise Exception(f"Operation Failed: {e}")
@@ -109,33 +127,49 @@ def get_low_stock():
 def get_staff_share():
     query = db.text("""
     WITH staff_hosp AS (
-        SELECT S.FullName, d.HID, COUNT(*) AS n,h.Name as HName
+        SELECT 
+            S.STAFF_ID,
+            S.FullName, 
+            d.HID, 
+            COUNT(*) AS n, 
+            h.Name as HName
         FROM Appointment a
         JOIN ClinicalActivity c ON c.CAID = a.CAID
         JOIN Department d ON d.DEP_ID = c.DEP_ID
-        JOIN Staff S ON S.STAFF_ID=c.STAFF_ID
-        JOIN Hospital h ON h.HID=d.HID
-        GROUP BY c.STAFF_ID, d.HID
+        JOIN Staff S ON S.STAFF_ID = c.STAFF_ID
+        JOIN Hospital h ON h.HID = d.HID
+        GROUP BY S.STAFF_ID, d.HID, S.FullName, h.Name
     ),
     hosp_tot AS (
-        SELECT d.HID, COUNT(*) AS n
+        SELECT d.HID, COUNT(*) AS total_appointments
         FROM Appointment a
         JOIN ClinicalActivity c ON c.CAID = a.CAID
         JOIN Department d ON d.DEP_ID = c.DEP_ID
         GROUP BY d.HID
     )
-
-    SELECT sh.FullName, sh.HID, sh.n AS TotalAppointments,sh.HName,
-    ROUND(100 * sh.n / ht.n, 2) AS PctOfHospital
-    
+    SELECT 
+        sh.FullName,
+        sh.HID,
+        sh.n,
+        sh.HName,                                              
+        ROUND(100.0 * sh.n / ht.total_appointments, 2) AS PctOfHospital
     FROM staff_hosp sh
-    JOIN hosp_tot ht ON ht.HID = sh.HID;
-    GROUP BY sh.HID
+    JOIN hosp_tot ht ON ht.HID = sh.HID
     ORDER BY PctOfHospital DESC
     """)
     try:
-        result = db.session.execute(query)
-        return result.fetchall()
+        result = db.session.execute(query).fetchall()
+        res = [
+            {
+                "Staff FullName": row.FullName,
+                "Hospital Name": row.HName,
+                "Total Appointments": row.n,
+                "Percentage Share within the Hospital": row.PctOfHospital
+            }
+            for row in result
+        ]
+        
+        return jsonify(res)
     except Exception as e:
         db.session.rollback()
         raise Exception(f"Operation Failed: {e}")
