@@ -236,14 +236,3 @@ If you encounter issues:
 - Modern dark theme inspired by contemporary web design
 
 
-**Note**: Remember to never commit your `.env` file to version control. Add it to `.gitignore`:
-
-```gitignore
-# .gitignore
-venv/
-__pycache__/
-*.pyc
-.env
-*.db
-.DS_Store
-```
