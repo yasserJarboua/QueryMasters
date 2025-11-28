@@ -116,7 +116,7 @@ run.bat
 ## 📁 Project Structure
 
 ```
-hospital-management-system/
+Web Application/
 │
 ├── main.py                 # Flask application entry point
 ├── database.py            # Database operations and queries
