@@ -12,7 +12,7 @@ A modern, dark-themed hospital management system built with Flask and MySQL. Thi
 - 👥 **Patient Management**: Add, view, and manage patient records
 - 👨‍⚕️ **Staff Analytics**: Track staff workload and appointment distribution
 - 💊 **Inventory Management**: Monitor medication stock levels with low-stock alerts
-- 🎨 **Modern UI**: Sleek dark theme with responsive design
+- 🎨 **Modern UI**: Sleek dark theme
 - 🔐 **Secure**: Environment-based configuration for database credentials
 
 ## 📋 Prerequisites
@@ -51,8 +51,8 @@ nano .env  # or use your preferred text editor
 
 ```batch
 # Clone the repository
-git clone <your-repo-url>
-cd hospital-management-system
+git clone https://github.com/yasserJarboua/QueryMasters/edit/main/Web%20Application/
+cd Web\ Application
 
 # Run setup
 setup.bat
@@ -68,8 +68,8 @@ run.bat
 
 1. **Clone the Repository**
    ```bash
-   git clone <your-repo-url>
-   cd hospital-management-system
+   git clone https://github.com/yasserJarboua/QueryMasters/edit/main/Web%20Application/
+   cd Web\ Application
    ```
 
 2. **Create Virtual Environment**
@@ -88,7 +88,11 @@ run.bat
    pip install -r requirements.txt
    ```
 
-4. **Configure Environment Variables**
+4. **Set Up MySQL Database**
+   
+   Create a priviliged user to the MNHS database
+
+6. **Configure Environment Variables**
    
    Create a `.env` file in the project root:
    ```env
@@ -98,28 +102,14 @@ run.bat
    MYSQL_DB=your_database_name
    MYSQL_USER=your_username
    MYSQL_PASSWORD=your_password
-
-   # Flask Configuration
-   FLASK_ENV=development
-   FLASK_DEBUG=True
-   SECRET_KEY=your-secret-key-here
    ```
 
-5. **Set Up MySQL Database**
-   
-   Create your database and tables using your existing SQL schema:
-   ```sql
-   CREATE DATABASE your_database_name;
-   USE your_database_name;
-   -- Run your schema SQL file here
-   ```
-
-6. **Run the Application**
+8. **Run the Application**
    ```bash
    python main.py
    ```
 
-7. **Access the Application**
+9. **Access the Application**
    
    Open your browser and navigate to: `http://127.0.0.1:5000`
 
@@ -171,19 +161,9 @@ MYSQL_USER=root            # Your MySQL username
 MYSQL_PASSWORD=password    # Your MySQL password
 ```
 
-### Flask Configuration
-
-Additional Flask settings in `.env`:
-
-```env
-FLASK_ENV=development      # development or production
-FLASK_DEBUG=True          # True for development, False for production
-SECRET_KEY=your-secret-key # Generate a random secret key
-```
-
 ## 📊 Database Schema Requirements
 
-Your MySQL database should have the following tables:
+Your MySQL database should have (at least optionaly it should matche exactly the MNHS DB schema) the following tables:
 
 - **Patient**: Patient information
 - **Staff**: Staff/doctor information
@@ -249,55 +229,12 @@ If you encounter issues:
 3. Ensure your `.env` file is configured correctly
 4. Make sure your MySQL database is running
 
-## 🚀 Deployment
-
-For production deployment:
-
-1. Set environment to production in `.env`:
-   ```env
-   FLASK_ENV=production
-   FLASK_DEBUG=False
-   ```
-
-2. Use a production WSGI server like Gunicorn:
-   ```bash
-   pip install gunicorn
-   gunicorn -w 4 main:app
-   ```
-
-3. Consider using a reverse proxy (Nginx/Apache)
-
-4. Secure your database credentials
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## 👨‍💻 Authors
-
-- Your Name - Initial work
 
 ## 🙏 Acknowledgments
 
 - Flask framework for the backend
 - Modern dark theme inspired by contemporary web design
-- Hospital management best practices
 
-## 📞 Support
-
-For support, email your-email@example.com or open an issue in the repository.
-
----
 
 **Note**: Remember to never commit your `.env` file to version control. Add it to `.gitignore`:
 
@@ -311,4 +248,3 @@ __pycache__/
 .DS_Store
 ```
 
-Made with ❤️ for better healthcare management
