@@ -31,8 +31,8 @@ Before you begin, ensure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone <your-repo-url>
-cd hospital-management-system
+git clone https://github.com/yasserJarboua/QueryMasters/
+cd Web\ Application
 
 # Make scripts executable
 chmod +x setup.sh run.sh
@@ -51,7 +51,7 @@ nano .env  # or use your preferred text editor
 
 ```batch
 # Clone the repository
-git clone https://github.com/yasserJarboua/QueryMasters/edit/main/Web%20Application/
+git clone https://github.com/yasserJarboua/QueryMasters/
 cd Web\ Application
 
 # Run setup
@@ -68,7 +68,7 @@ run.bat
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/yasserJarboua/QueryMasters/edit/main/Web%20Application/
+   git clone https://github.com/yasserJarboua/QueryMasters/
    cd Web\ Application
    ```
 
