@@ -32,7 +32,7 @@ Before you begin, ensure you have the following installed:
 ```bash
 # Clone the repository
 git clone https://github.com/yasserJarboua/QueryMasters/
-cd Web\ Application
+cd "Web Application"
 
 # Make scripts executable
 chmod +x setup.sh run.sh
