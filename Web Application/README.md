@@ -69,7 +69,7 @@ run.bat
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/yasserJarboua/QueryMasters/
-   cd Web\ Application
+   cd "Web Application"
    ```
 
 2. **Create Virtual Environment**
