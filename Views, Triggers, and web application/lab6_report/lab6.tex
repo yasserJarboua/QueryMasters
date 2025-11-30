@@ -1,0 +1,1006 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}   % images
+\usepackage{fancyhdr}   % headers/footers
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{float}
+\usepackage{xcolor}
+\lstset{
+    language=SQL,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    stringstyle=\color{red},
+    commentstyle=\color{green!60!black}\itshape,
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=5pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=single
+}
+\geometry{margin=1in}
+
+
+% ---------- Header ----------
+\setlength{\headheight}{36pt}
+\setlength{\headsep}{18pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[width=0.13\textwidth, keepaspectratio]{Figures/UM6Plogo.png}}
+\fancyhead[R]{\includegraphics[width=0.13\textwidth, keepaspectratio]{Figures/CC.jpg}}
+\fancyfoot[L]{Data Management Lab}
+\fancyfoot[R]{Prof. Karima Echihabi}
+\fancyfoot[C]{Page \thepage}
+
+% ---------- Deliverable Template ----------
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+  \includegraphics[width=0.25\textwidth]{Figures/UM6Plogo.png}\hfill
+  \includegraphics[width=0.25\textwidth]{Figures/CC.jpg}
+  \vspace{1.2cm}
+
+  {\LARGE \textbf{Deliverable \#:Views, Triggers, and Application development}}\\[0.6cm]
+  {\large \textbf{Data Management Course}}\\[0.2cm]
+  {\large UM6P College of Computing}\\[0.8cm]
+
+  {\normalsize \textbf{Professor:} Karima Echihabi \quad 
+   \textbf{Program:} Computer Engineering}\\[0.1cm]
+  {\normalsize \textbf{Session:} Fall 2025}\\[1cm]
+
+  \rule{0.9\textwidth}{0.5pt}\\[0.5cm]
+  {\large \textbf{Team Information}} \\[0.3cm]
+  \begin{tabular}{|l|l|}
+     \hline
+    \textbf{Team Name} & QueryMaster \\ \hline
+    \textbf{Member 1}  & El Mehdi Regagui  \\ \hline
+    \textbf{Member 2}  & Yasser Jarboua   \\ \hline
+    \textbf{Member 3}  & Adam Ibourg-EL Idrissi   \\ \hline
+    \textbf{Member 4}  & Salma Mana   \\ \hline
+    \textbf{Member 5}  & Hiba Mhirit   \\ \hline
+    \textbf{Member 6}  & Sara Qiouame   \\ \hline
+    \textbf{Member 7}  & Douaae Mabrouk   \\ \hline
+    \textbf{Repository Link} & \texttt{https://github.com/yasserJarboua/QueryMasters/} \\ \hline
+  \end{tabular}
+  \rule{0.9\textwidth}{0.5pt}\\
+\end{center}
+\clearpage
+\pagestyle{fancy}
+
+% ---------- Sections for Students ----------
+\section{Introduction}
+The Moroccan National Health Services (MNHS) database system requires robust management of complex healthcare data including patients, medical staff, hospital departments, appointments, prescriptions, medications, insurance, and billing information. This deliverable addresses three critical aspects of database system enhancement: the implementation of SQL views to optimize query performance and usability, the development of database triggers to enforce business rules and maintain data consistency, and the creation of a comprehensive web application interface. The application layer, built using Python for backend operations with JavaScript, CSS, and HTML for frontend presentation, provides an intuitive platform to interact with the MNHS database while ensuring data integrity through properly implemented database constraints and business logic.
+
+\section{Requirements}
+\begin{enumerate}
+    \item \textbf{Views}
+     Define each view in SQL and explain briefly (1–2 sentences) how it can simplify application code or improve query performance (for example by encapsulating complex joins).
+    \begin{enumerate}
+        \item \textbf{UpcomingByHospital view.}
+        Build a view that returns, for the next fourteen days, per hospital and per date:\texttt{HospitalName}, \texttt{ApptDate}, \texttt{ScheduledCount}.Use \texttt{Appointment} joined through \texttt{ClinicalActivity} $\rightarrow$ \texttt{Department} $\rightarrow$ \texttt{Hospital}.  
+        Consider only rows with \texttt{Appointment.Status = 'Scheduled'}.
+        
+        \item \textbf{DrugPricingSummary view.}
+        Build a view that summarizes medication pricing per hospital with the columns:\texttt{HID}, \texttt{HospitalName}, \texttt{MID}, \texttt{MedicationName}, \texttt{AvgUnitPrice}, \texttt{MinUnitPrice}, \texttt{MaxUnitPrice}, \texttt{LastStockTimestamp}.
+        Use \texttt{Stock} with \texttt{Hospital} and \texttt{Medication}.
+        Group by hospital and medication.
+        
+        \item \textbf{StaffWorkloadThirty view.}
+        Build a view that returns per staff member, over the last thirty days:\texttt{STAFF\_ID}, \texttt{FullName}, \texttt{TotalAppointments}, \texttt{ScheduledCount}, \texttt{CompletedCount} ,\texttt{CancelledCount}.
+        Source from \texttt{Appointment} joined via \texttt{ClinicalActivity} $\rightarrow$ \texttt{Staff}.
+        Treat missing counts as zero.
+        
+        \item \textbf{PatientNextVisit view.}
+        Build a view that returns, for each patient, the next scheduled visit with:\texttt{IID}, \texttt{FullName}, \texttt{NextApptDate}, \texttt{DepartmentName}, \texttt{HospitalName}, \texttt{City}.
+        Join \texttt{Patient} $\rightarrow$ \texttt{ClinicalActivity} $\rightarrow$ \texttt{Appointment} and through \texttt{Department} $\rightarrow$ \texttt{Hospital}.  
+        Pick the minimum \texttt{ClinicalActivity.Date} strictly greater than today among rows with \texttt{Status = 'Scheduled'}.
+    \end{enumerate}
+    \item \textbf{Triggers}
+    \begin{enumerate}
+        \item \textbf{Reject double booking for a staff member.}
+        Create a trigger on \texttt{Appointment} that rejects an \texttt{INSERT} or \texttt{UPDATE} if it would schedule two \texttt{Appointment} rows at the same \texttt{ClinicalActivity.Date} and \texttt{ClinicalActivity.Time} for the same\texttt{STAFF\_ID}.  Use \texttt{SIGNAL} with a clear error message.
+    
+        \item \textbf{Recompute Expense.Total when prescription lines change.}
+        Create triggers on \texttt{Includes} for \texttt{INSERT}, \texttt{UPDATE}, and \texttt{DELETE} that recompute the \texttt{Expense.Total} of the linked clinical activity as the sum of current \texttt{Stock.UnitPrice} for all medications included in the corresponding prescription. 
+        Navigate \texttt{Includes} $\rightarrow$ \texttt{Prescription} $\rightarrow$ \texttt{ClinicalActivity} $\rightarrow$ \texttt{Expense}, and join \texttt{Stock} by (\texttt{HID} from \texttt{Department} $\rightarrow$ \texttt{Hospital} of the activity, \texttt{MID}).
+        Use \texttt{AFTER INSERT}, \texttt{AFTER UPDATE}, and \texttt{AFTER DELETE} triggers to recompute the total.  
+        If a price is missing for at least one medication, block the change with a clear error using \texttt{SIGNAL} (do not update \texttt{Expense.Total}).
+    
+        \item \textbf{Prevent negative or inconsistent stock.}
+        Create \texttt{BEFORE INSERT} and \texttt{BEFORE UPDATE} triggers on \texttt{Stock} that reject any row with \texttt{Qty < 0} or \texttt{UnitPrice <= 0}, and require \texttt{ReorderLevel >= 0}.  
+        In addition, require that any change decreasing \texttt{Qty} cannot drop below zero.  
+        Use \texttt{SIGNAL} to reject invalid rows or updates with a clear error message.
+    
+        \item \textbf{Protect referential integrity on patient delete.}
+        Create a \texttt{BEFORE DELETE} trigger on \texttt{Patient} that blocks deletion if any \texttt{ClinicalActivity} exists for the patient. Use \texttt{SIGNAL} to raise an error instructing the user to reassign or delete dependent activities first.
+    \end{enumerate}
+    \item \textbf{Application development}
+    \begin{itemize}
+        \item Develop a web application on top of the MNHS database (for example using Python, PHP, or J2EE).
+        \item Implement the following commands in a backend application of your choice (for example using Python, PHP, or another web framework) that connects to the MNHS  database.
+        \begin{enumerate}
+            \item \textbf{list\_patients} \\
+            print the first twenty patients ordered by last name.
+        
+            \item \textbf{schedule} \\
+            create a clinical activity and a scheduled appointment in one transaction.
+        
+            \item \textbf{low\_appt} \\
+            create a clinical activity and a scheduled appointment. \\[4pt]
+            \textbf{low\_stock}: list medications below \texttt{ReorderLevel} per hospital 
+            with a left join so that medications without stock also appear.
+        
+            \item \textbf{staff\_share} \\
+            for each staff member compute total number of appointments and percentage share 
+            within their hospital. Return a sorted table.
+        \end{enumerate}
+    \end{itemize}  
+\end{enumerate}
+
+\section{Methodology}
+
+\subsection{Design Approach}
+We followed a systematic approach: first analyzing the MNHS business requirements, then designing database components (views and triggers), and finally developing the web application layer. Each component was designed to address specific performance, integrity, and usability needs.
+
+\subsection{Technology Selection}\\
+Database: MySQL for robust relational data management
+\\Backend: Python Flask for rapid web application development
+\\Frontend: HTML/CSS/JavaScript for responsive user interfaces
+\\ORM: SQLAlchemy for database abstraction and security
+
+\subsection{Implementation Strategy}\\
+Views were designed to encapsulate complex joins and calculations
+\\Triggers were implemented to enforce critical business rules at the database level
+\\The web application was structured using MVC pattern for maintainability
+\\Security measures included parameterized queries and environment variables
+
+\section{Implementation \& Results}
+\begin{enumerate}
+    \item \textbf{Views}
+    \begin{enumerate}
+        \item \textbf{UpcomingByHospital view.}
+        \begin{lstlisting}[language=SQL]
+CREATE VIEW UpcomingByHospital AS
+SELECT H.Name AS HospitalName,
+       CA.Date AS ApptDate,
+       COUNT(*) AS ScheduledCount
+FROM Appointment A
+JOIN ClinicalActivity CA ON A.CAID = CA.CAID
+JOIN Department D ON D.DEP_ID = CA.DEP_ID
+JOIN Hospital H ON H.HID = D.HID
+WHERE A.Status = 'Scheduled'
+      AND CA.Date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 14 DAY)
+GROUP BY
+H.Name,
+CA.Date;
+-- test1
+SELECT * FROM UpcomingByHospital ORDER BY HospitalName, ApptDate;
+        \end{lstlisting}
+        \textbf{explanation:}
+        This view puts all the joins needed to get upcoming appointments for a hospital in one place.
+        It makes queries easier to write and can run faster because the database uses the view’s fixed structure.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=0.75\linewidth]{screenshots/view1.jpeg}
+            \caption{UpcomingByHospital test}
+            \label{fig:UpcomingByHospital}
+        \end{figure}
+        
+        \item \textbf{DrugPricingSummary view.}
+        \begin{lstlisting}[language=SQL]
+DROP VIEW IF EXISTS DrugPricingSummary;
+
+CREATE VIEW DrugPricingSummary AS
+SELECT Hospital.HID,
+       Hospital.name AS HospitalName,
+       Medication.MID,
+       Medication.Name AS MedicationName,
+       AVG(Stock.UnitPrice) AS AvgUnitPrice,
+       MIN(Stock.UnitPrice) AS MinUnitPrice,
+       MAX(Stock.UnitPrice) AS MaxUnitPrice,
+       MAX(Stock.StockTimestamp) AS LastStockTimestamp
+FROM Stock 
+JOIN Hospital  ON Hospital.HID = Stock.HID
+JOIN Medication  ON Medication.MID = Stock.MID
+GROUP BY Hospital.HID, Hospital.name, Medication.MID, Medication.Name;
+-- test2
+SELECT * 
+FROM DrugPricingSummary 
+ORDER BY HospitalName, MedicationName;
+        \end{lstlisting}
+        \textbf{explanation:}
+        The DrugPricingSummary view provides a consolidated overview of medication prices across hospitals by joining the Stock, Hospital, and Medication tables to recreate the full relationship between each hospital and the medications it stores. For every medication–hospital pair, the view computes essential pricing statistics—including the average, minimum, and maximum prices—as well as the most recent stock update date. These metrics are produced using aggregate functions after grouping the data by hospital and medication, ensuring that each row of the view represents one medication within a specific hospital. By encapsulating these joins and calculations inside a view, the database simplifies future queries, ensures consistency across the application, and improves efficiency whenever pricing information is needed, making it easier to track price variations and monitor stock updates across hospitals.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/view2.jpeg}
+            \caption{DrugPricingSummary test}
+            \label{fig:DrugPricingSummary}
+        \end{figure}
+        
+        
+        \item \textbf{StaffWorkloadThirty view.}
+        \begin{lstlisting}[language=SQL]
+CREATE OR REPLACE VIEW StaffWorkloadThirty AS
+SELECT 
+    s.STAFF_ID,
+    s.FullName,
+    COUNT(a.CAID) AS TotalAppointments,
+    SUM(a.status = 'Scheduled') AS ScheduledCount,
+    SUM(a.status = 'Completed') AS CompletedCount,
+    SUM(a.status = 'Cancelled') AS CancelledCount
+FROM Staff s
+LEFT JOIN ClinicalActivity ca 
+       ON s.STAFF_ID = ca.STAFF_ID
+       AND ca.DATE >= CURDATE() - INTERVAL 30 DAY
+LEFT JOIN Appointment a 
+       ON a.CAID = ca.CAID
+GROUP BY s.STAFF_ID, s.FullName;
+-- test 3
+-- Update the dates so they are within the last 30 days
+UPDATE ClinicalActivity 
+SET Date = CURDATE() - INTERVAL 5 DAY 
+WHERE CAID = 101;
+
+UPDATE ClinicalActivity 
+SET Date = CURDATE() - INTERVAL 10 DAY 
+WHERE CAID = 102;
+
+UPDATE ClinicalActivity 
+SET Date = CURDATE() - INTERVAL 15 DAY 
+WHERE CAID = 103;
+
+UPDATE ClinicalActivity 
+SET Date = CURDATE() - INTERVAL 20 DAY 
+WHERE CAID IN (104, 105, 106);
+-- Check the new dates
+SELECT CAID, STAFF_ID, Date, 
+       DATEDIFF(CURDATE(), Date) as Jours_Depuis
+FROM ClinicalActivity 
+ORDER BY Date DESC;
+SELECT * FROM StaffWorkloadThirty ORDER BY TotalAppointments DESC;
+        \end{lstlisting}
+         \textbf{explanation:}
+         This view simplifies application code by encapsulating the complex joins and aggregations between Staff, ClinicalActivity, and Appointment, so the application can retrieve each staff’s workload with a single query. It can also improve query performance because the database can optimize the view internally, avoiding repeated recomputation of the joins and aggregations every time the data is needed.
+         \begin{figure}[H]
+             \centering
+             \includegraphics[width=1\linewidth]{screenshots/view3.jpeg}
+             \caption{StaffWorkloadThirty test}
+             \label{fig:StaffWorkloadThirty}
+         \end{figure}
+         
+        \item \textbf{PatientNextVisit view.}
+        \begin{lstlisting}[language=SQL]
+CREATE VIEW PatientNextVisit AS
+SELECT P.IID AS IID,
+       P.FullName AS FullName,
+       CA.Date AS NextApptDate,
+       D.Name AS DepartmentName,
+       H.Name AS HospitalName,
+       H.City AS City
+FROM Patient P
+LEFT JOIN (
+      SELECT CA.IID,
+             MIN(CA.DATE) AS NextDate
+	  FROM ClinicalActivity CA
+      JOIN Appointment A ON CA.CAID = A.CAID
+      WHERE A.Status = 'Scheduled'
+            AND CA.Date > CURDATE()
+	  GROUP BY CA.IID
+      ) NextVisit ON NextVisit.IID = P.IID
+LEFT JOIN ClinicalActivity CA ON CA.IID = P.IID AND CA.Date = NextVisit.NextDate
+LEFT JOIN Appointment A ON A.CAID = CA.CAID
+LEFT JOIN Department D ON D.DEP_ID = CA.DEP_ID
+LEFT JOIN Hospital H ON H.HID = D.HID;
+SELECT * FROM PatientNextVisit ORDER BY NextApptDate;
+--Let's check all future activities of Mohamed Alami (IID=1)
+SELECT CA.CAID, CA.Date, CA.Time, D.Name as Department, A.Status
+FROM ClinicalActivity CA
+JOIN Department D ON CA.DEP_ID = D.DEP_ID  
+JOIN Appointment A ON CA.CAID = A.CAID
+WHERE CA.IID = 1 
+  AND A.Status = 'Scheduled'
+  AND CA.Date > CURDATE()
+ORDER BY CA.Date;
+        \end{lstlisting}
+        \textbf{explanation:}
+        This view gives each patient’s next appointment automatically, so the application doesn’t need to write the sorting and filtering each time.
+        It makes the code shorter and can speed things up because the database handles the work inside the view.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/view3 (0).jpeg}
+            \caption{PatientNextVisit test1}
+            \label{fig:PatientNextVisit}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/view4.png}
+            \caption{PatientNextVisit test2}
+            \label{fig:PatientNextVisit}
+        \end{figure}
+    \end{enumerate}
+    
+    \item \textbf{Triggers}
+    \begin{enumerate}
+        \item \textbf{Reject double booking for a staff member.}
+        \begin{lstlisting}[language=SQL]
+DELIMITER $$
+
+CREATE TRIGGER DoubleBooking
+BEFORE INSERT ON Appointment
+FOR EACH ROW
+BEGIN
+     DECLARE cnt INT;
+     DECLARE new_staff INT;
+     DECLARE new_date DATE;
+     DECLARE new_time TIME;
+     
+     SELECT STAFF_ID, Date, time
+     INTO new_staff, new_date, new_time
+     FROM ClinicalActivity
+     WHERE CAID = NEW.CAID;
+     
+     SELECT COUNT(*) INTO cnt
+     FROM ClinicalActivity 
+     WHERE STAFF_ID = new_staff
+           AND Date = new_date
+           AND Time = new_time;
+     
+     IF cnt > 0 THEN
+           SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'This staff member already has an appointment at this time';
+	 END IF;
+END $$
+DELIMITER ;
+INSERT INTO ClinicalActivity VALUES 
+(113, 4, 501, 10, CURDATE() + INTERVAL 2 DAY, '14:00:00');
+
+INSERT INTO Appointment VALUES (113, 'Test double booking', 'Scheduled');
+
+DELIMITER $$
+
+CREATE TRIGGER DoubleBooking
+BEFORE UPDATE ON Appointment
+FOR EACH ROW
+BEGIN
+     DECLARE cnt INT;
+     DECLARE new_staff INT;
+     DECLARE new_date DATE;
+     DECLARE new_time TIME;
+     
+     SELECT STAFF_ID, Date, time
+     INTO new_staff, new_date, new_time
+     FROM ClinicalActivity
+     WHERE CAID = NEW.CAID;
+     
+     SELECT COUNT(*) INTO cnt
+     FROM ClinicalActivity 
+     WHERE STAFF_ID = new_staff
+           AND Date = new_date
+           AND Time = new_time
+           AND CAID <> NEW.CAID;
+     
+     IF cnt > 0 THEN
+           SIGNAL SQLSTATE '45000'
+                SET MESSAGE_TEXT = 'This staff member already has an appointment at this time';
+	 END IF;
+END $$
+DELIMITER ;
+\end{lstlisting}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/trigger1.jpeg}
+            \caption{Reject double booking for a staff member test}
+            \label{fig:Reject double booking for a staff member.}
+        \end{figure}
+        
+        \item \textbf{Recompute Expense.Total when prescription lines change.}
+        \begin{lstlisting}[language=SQL]
+DELIMITER $$
+CREATE TRIGGER RecomputeTotal_AfterInsert
+AFTER INSERT ON Includes
+FOR EACH ROW
+BEGIN
+    DECLARE hospital_id INT;
+    DECLARE computed_total DECIMAL(10,2);
+
+    SELECT Department.HID
+    INTO hospital_id
+    FROM ClinicalActivity
+    JOIN Department ON ClinicalActivity.DEP_ID = Department.DEP_ID
+    JOIN Prescription ON Prescription.CAID = ClinicalActivity.CAID
+    WHERE Prescription.PID = NEW.PID;
+
+    IF EXISTS (
+        SELECT 1
+        FROM Includes inc
+        LEFT JOIN Stock stk
+            ON stk.MID = inc.MID AND stk.HID = hospital_id
+        WHERE inc.PID = NEW.PID
+        AND stk.UnitPrice IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Error: Missing price for at least one medication in this prescription.';
+    END IF;
+
+    SELECT SUM(stk.UnitPrice)
+    INTO computed_total
+    FROM Includes inc
+    JOIN Stock stk
+        ON stk.MID = inc.MID AND stk.HID = hospital_id
+    WHERE inc.PID = NEW.PID;
+
+    UPDATE Expense
+    SET Total = computed_total
+    WHERE CAID = (
+        SELECT CAID FROM Prescription WHERE PID = NEW.PID
+    );
+END$$
+
+DELIMITER ;
+DELIMITER $$
+
+CREATE TRIGGER RecomputeTotal_AfterUpdate
+AFTER UPDATE ON Includes
+FOR EACH ROW
+BEGIN
+    DECLARE hospital_id INT;
+    DECLARE computed_total DECIMAL(10,2);
+    DECLARE prescription_id INT;
+
+    SET prescription_id = NEW.PID;
+
+    SELECT Department.HID
+    INTO hospital_id
+    FROM ClinicalActivity
+    JOIN Department ON ClinicalActivity.DEP_ID = Department.DEP_ID
+    JOIN Prescription ON Prescription.CAID = ClinicalActivity.CAID
+    WHERE Prescription.PID = prescription_id;
+
+    IF EXISTS (
+        SELECT 1
+        FROM Includes inc
+        LEFT JOIN Stock stk
+            ON stk.MID = inc.MID AND stk.HID = hospital_id
+        WHERE inc.PID = prescription_id
+        AND stk.UnitPrice IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Error: Missing price for at least one medication in this prescription.';
+    END IF;
+
+    -- Compute total
+    SELECT SUM(stk.UnitPrice)
+    INTO computed_total
+    FROM Includes inc
+    JOIN Stock stk
+        ON stk.MID = inc.MID AND stk.HID = hospital_id
+    WHERE inc.PID = prescription_id;
+
+    UPDATE Expense
+    SET Total = computed_total
+    WHERE CAID = (
+        SELECT CAID FROM Prescription WHERE PID = prescription_id
+    );
+END$$
+
+DELIMITER ;
+DELIMITER $$
+
+CREATE TRIGGER RecomputeTotal_AfterDelete
+AFTER DELETE ON Includes
+FOR EACH ROW
+BEGIN
+    DECLARE hospital_id INT;
+    DECLARE computed_total DECIMAL(10,2);
+    DECLARE prescription_id INT;
+
+    SET prescription_id = OLD.PID;
+
+    SELECT Department.HID
+    INTO hospital_id
+    FROM ClinicalActivity
+    JOIN Department ON ClinicalActivity.DEP_ID = Department.DEP_ID
+    JOIN Prescription ON Prescription.CAID = ClinicalActivity.CAID
+    WHERE Prescription.PID = prescription_id;
+
+    IF EXISTS (
+        SELECT 1
+        FROM Includes inc
+        LEFT JOIN Stock stk
+            ON stk.MID = inc.MID AND stk.HID = hospital_id
+        WHERE inc.PID = prescription_id
+        AND stk.UnitPrice IS NULL
+    ) THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = 'Error: Missing price for at least one medication in this prescription.';
+    END IF;
+
+    SELECT SUM(stk.UnitPrice)
+    INTO computed_total
+    FROM Includes inc
+    JOIN Stock stk
+        ON stk.MID = inc.MID AND stk.HID = hospital_id
+    WHERE inc.PID = prescription_id;
+
+    UPDATE Expense
+    SET Total = computed_total
+    WHERE CAID = (
+        SELECT CAID FROM Prescription WHERE PID = prescription_id
+    );
+END$$
+
+DELIMITER ;
+-- test
+--Check the current total
+SELECT Total FROM Expense WHERE CAID = 101;
+
+-- Add a drug
+INSERT INTO Includes VALUES (1, 5, '2 puffs', 'As needed');
+
+-- Check the new total
+SELECT Total FROM Expense WHERE CAID = 101;
+-- Check the data before testing
+SELECT E.ExpID, E.CAID, E.Total, P.PID, I.MID, M.Name, S.UnitPrice
+FROM Expense E
+JOIN Prescription P ON E.CAID = P.CAID
+JOIN Includes I ON P.PID = I.PID
+JOIN Medication M ON I.MID = M.MID
+JOIN ClinicalActivity CA ON P.CAID = CA.CAID
+JOIN Department D ON CA.DEP_ID = D.DEP_ID
+LEFT JOIN Stock S ON S.MID = I.MID AND S.HID = D.HID
+ORDER BY E.ExpID, I.MID;
+
+INSERT INTO Stock (HID, MID, UnitPrice, Qty, ReorderLevel) 
+VALUES (1, 1, 10.00, -5, 10);
+UPDATE Stock 
+SET Qty = 80, UnitPrice = 6.00, ReorderLevel = 15 
+WHERE HID = 1 AND MID = 1;
+SELECT HID, MID, Qty, UnitPrice, ReorderLevel 
+FROM Stock 
+WHERE HID = 1 AND MID = 1;
+DELIMITER $$
+\end{lstlisting}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/trigger2.jpeg}
+            \caption{Recompute Expense test}
+            \label{fig:Recompute Expense t}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/trigger2 (1).jpeg}
+            \caption{Recompute Expense test}
+            \label{fig:Recompute Expense t}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/trigger2 (2).jpeg}
+            \caption{Recompute Expense test}
+            \label{fig:Recompute Expense t}
+        \end{figure}
+        
+            
+        \item \textbf{Prevent negative or inconsistent stock.}
+        \begin{lstlisting}[language=SQL]
+DELIMITER //
+CREATE TRIGGER insertStock 
+BEFORE INSERT ON stock
+FOR EACH ROW
+BEGIN
+    IF NEW.Qty < 0 OR NEW.UnitPrice <= 0 OR NEW.ReorderLevel < 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = "Cannot insert negative stock quantities, unit price, or reorder level";
+    END IF;
+END;
+//
+DELIMITER;
+
+-- update trigger:
+
+DELIMITER //
+CREATE TRIGGER updateStock
+BEFORE UPDATE ON stock
+FOR EACH ROW
+BEGIN
+    IF NEW.Qty < 0 OR NEW.UnitPrice <= 0 OR NEW.ReorderLevel < 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = "Cannot update to negative stock quantities, unit price, or reorder level";
+    END IF;
+
+    IF NEW.Qty < OLD.Qty AND NEW.Qty < 0 THEN
+        SIGNAL SQLSTATE '45000'
+            SET MESSAGE_TEXT = "Cannot decrease Qty below zero";
+    END IF;
+END;
+//
+
+DELETE FROM Patient WHERE IID = 1;
+-- test 3
+-- Test: Add a new medication to an existing prescription and verify the expense total updates automatically
+-- First check current state
+SELECT p.PID, e.Total as CurrentTotal, 
+       GROUP_CONCAT(m.Name) as CurrentMeds
+FROM Prescription p 
+JOIN Expense e ON e.CAID = p.CAID 
+LEFT JOIN Includes i ON i.PID = p.PID
+LEFT JOIN Medication m ON m.MID = i.MID
+WHERE p.PID = 2
+GROUP BY p.PID, e.Total;
+
+-- Add Amoxicillin to prescription 1
+INSERT INTO Includes (PID, MID, Dosage, Duration) 
+VALUES (2, 5, '2 puffs', 'As needed');
+
+SELECT p.PID, e.Total as NewTotal,
+       GROUP_CONCAT(m.Name) as UpdatedMeds
+FROM Prescription p 
+JOIN Expense e ON e.CAID = p.CAID 
+LEFT JOIN Includes i ON i.PID = p.PID
+LEFT JOIN Medication m ON m.MID = i.MID
+WHERE p.PID = 2
+GROUP BY p.PID, e.Total;
+
+DELIMITER ;
+
+\end{lstlisting}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/trigger3.jpeg}
+            \caption{Prevent negative or inconsistent stock test}
+            \label{fig:Prevent negative or inconsistent stock }
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/trigger3 (2).jpeg}
+            \caption{Prevent negative or inconsistent stock test}
+            \label{fig:Prevent negative or inconsistent stock }
+        \end{figure}
+    
+        \item \textbf{Protect referential integrity on patient delete.}
+       \begin{lstlisting}[language=SQL]
+DELIMITER $$
+CREATE TRIGGER PreventPatientDelete
+BEFORE DELETE ON Patient
+FOR EACH ROW
+BEGIN
+    IF EXISTS (SELECT 1 FROM ClinicalActivity WHERE IID = OLD.IID) THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Cannot delete patient. Clinical activities exist. Please reassign or delete dependent activities first.';
+    END IF;
+END$$
+
+DELIMITER ;
+
+\end{lstlisting}
+    \end{enumerate}
+    
+    \item \textbf{Web Application Implementation}\\
+    Our MNHS web application was developed using a Python Flask backend with JavaScript, CSS, and HTML frontend, providing an intuitive interface for database interactions.
+    \begin{enumerate}
+        \item \textbf{Application Architecture}\\
+        Our web application follows a three-tier architecture with Flask handling the backend logic, SQLAlchemy managing database operations, and HTML/CSS/JavaScript providing the user interface. The modular structure separates concerns between data access, business logic, and presentation layers.
+        \begin{lstlisting}[language=Python] 
+import os
+from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from flask import jsonify
+
+
+load_dotenv()
+db = SQLAlchemy()
+
+def get_database_config():
+    """Returns database configuration from environment variables"""
+    return dict(
+        host=os.getenv("MYSQL_HOST"),
+        port=int(os.getenv("MYSQL_PORT", 3306)),
+        database=os.getenv("MYSQL_DB"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD")
+    )
+
+def init_db(app):
+    """Initialize database with Flask app"""
+    cfg = get_database_config()
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'mysql+pymysql://{cfg["user"]}:{cfg["password"]}@{cfg["host"]}/{cfg["database"]}'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
+    return db
+\end{lstlisting}
+
+        \item \textbf{Command list\_patients: }
+        \textbf{Backend Implementation}:
+        \begin{lstlisting}[language=Python] 
+    def list_patients_ordered_by_last_name(limit=20):
+    query = db.text(f"""
+    SELECT IID, FullName, Sex, Phone
+    FROM Patient 
+    ORDER BY SUBSTRING_INDEX(FullName, ' ', -1), FullName
+    LIMIT {limit}
+    """)
+    result = db.session.execute(query).fetchall()
+    res = [
+        {
+            "IID": patient[0],
+            "FullName": patient[1],
+            "Sex": patient[2],
+            "Phone": patient[3],
+        }
+        for patient in result
+    ]
+    return res
+        \end{lstlisting}
+        \textbf{Patients List Interface}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/list_patient.png}
+            \caption{Patients list command interface}
+            \label{fig:patients_list}
+        \end{figure}
+        
+        \item \textbf{Command schedule\_appt: }
+        \textbf{Backend Implementation}:
+        \begin{lstlisting}[language=Python] 
+    def schedule_appointment(caid, iid, staff_id, dep_id, date_str, time_str, reason):
+    ins_ca = db.text("""
+        INSERT INTO ClinicalActivity(CAID, IID, STAFF_ID, DEP_ID, Date, Time)
+        VALUES (:caid, :iid, :staff_id, :dep_id, :date_str, :time_str)
+    """)
+
+    ins_appt = db.text("""
+        INSERT INTO Appointment(CAID, Reason, Status)
+        VALUES (:caid, :reason, 'Scheduled')
+    """)
+    try:
+        db.session.execute(ins_ca, {
+            "caid": caid,
+            "iid": iid,
+            "staff_id": staff_id,
+            "dep_id": dep_id,
+            "date_str": date_str,
+            "time_str": time_str
+        })
+        db.session.execute(ins_appt, {
+            "caid": caid,
+            "reason": reason
+        })
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        raise Exception(f"OPERATION FAILED: {e}")
+
+        \end{lstlisting}
+        \textbf{Schedule Appointment Interface}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/Schedule_Appointment.png}
+            \caption{Schedule Appointment}
+            \label{fig:Schedule Appointment Interface}
+        \end{figure}
+        
+        \item \textbf{Command low\_stock: }
+        \textbf{Backend Implementation}:
+        \begin{lstlisting}[language=Python] 
+    def get_low_stock():
+    query = db.text("""
+        SELECT
+            h.HID,
+            h.Name AS HospitalName,
+            m.MID,
+            m.Name AS MedicationName,
+            COALESCE(s.Qty, 0) AS Quantity,
+            COALESCE(s.ReorderLevel, 10) AS ReorderLevel
+        FROM Medication m
+        LEFT JOIN Stock s ON s.MID = m.MID
+        JOIN Hospital h ON s.HID = h.HID
+        WHERE COALESCE(s.Qty, 0) < COALESCE(s.ReorderLevel, 10)
+        ORDER BY h.HID, m.Name
+        """)
+    try:
+        result = db.session.execute(query).fetchall()
+        res = [
+            {
+                "HID": row[0],
+                "HospitalName": row[1],
+                "MID" : row[2],
+                "Medication Name": row[3],
+                "Quantity" : row[4],
+                "Reorder Level" : row[5]
+            }
+            for row in result
+        ]
+        return res
+    except Exception as e:
+        db.session.rollback()
+        raise Exception(f"Operation Failed: {e}")
+
+
+        \end{lstlisting}
+        \textbf{Low Stock Alert Interface}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/low_stock_alert.png}
+            \caption{low stock alert}
+            \label{fig:Low Stock Alert Interface}
+        \end{figure}
+
+        \item \textbf{Command staff\_share: }
+        \textbf{Backend Implementation}:
+        \begin{lstlisting}[language=Python]
+    def get_staff_share():
+    query = db.text("""
+    WITH staff_hosp AS (
+        SELECT 
+            S.STAFF_ID,
+            S.FullName, 
+            d.HID, 
+            COUNT(*) AS n, 
+            h.Name as HName
+        FROM Appointment a
+        JOIN ClinicalActivity c ON c.CAID = a.CAID
+        JOIN Department d ON d.DEP_ID = c.DEP_ID
+        JOIN Staff S ON S.STAFF_ID = c.STAFF_ID
+        JOIN Hospital h ON h.HID = d.HID
+        GROUP BY S.STAFF_ID, d.HID, S.FullName, h.Name
+    ),
+    hosp_tot AS (
+        SELECT d.HID, COUNT(*) AS total_appointments
+        FROM Appointment a
+        JOIN ClinicalActivity c ON c.CAID = a.CAID
+        JOIN Department d ON d.DEP_ID = c.DEP_ID
+        GROUP BY d.HID
+    )
+    SELECT 
+        sh.FullName,
+        sh.HID,
+        sh.n,
+        sh.HName,                                              
+        ROUND(100.0 * sh.n / ht.total_appointments, 2) AS PctOfHospital
+    FROM staff_hosp sh
+    JOIN hosp_tot ht ON ht.HID = sh.HID
+    ORDER BY PctOfHospital DESC
+    """)
+    try:
+        result = db.session.execute(query).fetchall()
+        res = [
+            {
+                "Staff FullName": row.FullName,
+                "Hospital Name": row.HName,
+                "Total Appointments": row.n,
+                "Percentage Share within the Hospital": row.PctOfHospital
+            }
+            for row in result
+        ]
+        
+        return res
+    except Exception as e:
+        db.session.rollback()
+        raise Exception(f"Operation Failed: {e}")
+    
+        \end{lstlisting}
+        \textbf{Staff Analytics Interface}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{screenshots/staff_Analytics.png}
+            \caption{Staff Analytics}
+            \label{fig:Staff Analytics Interface}
+        \end{figure}
+
+        \item \textbf{Application Setup and Running}
+        \begin{lstlisting}
+#requirements.txt
+blinker==1.9.0
+cffi==2.0.0
+click==8.3.1
+cryptography==46.0.3
+dotenv==0.9.9
+Flask==3.1.2
+Flask-SQLAlchemy==3.1.1
+greenlet==3.2.4
+itsdangerous==2.2.0
+Jinja2==3.1.6
+MarkupSafe==3.0.3
+pycparser==2.23
+PyMySQL==1.1.2
+python-dotenv==1.2.1
+SQLAlchemy==2.0.44
+typing_extensions==4.15.0
+Werkzeug==3.1.3
+
+# .env file (example)
+# MySQL Database Configuration
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_DB=lab6
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+
+# Flask Configuration
+FLASK_ENV=development
+FLASK_DEBUG=True
+SECRET_KEY=your-secret-key-here
+
+        \end{lstlisting}
+        \begin{lstlisting}
+run.bat
+
+========================================================
+   MNHS Hospital Management System - Starting...
+========================================================
+
+Activating virtual environment...
+Starting Flask application...
+Press Ctrl+C to stop the server
+
+ * Serving Flask app 'main'
+ * Debug mode: on
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:5000
+Press CTRL+C to quit
+ * Restarting with stat
+ * Debugger is active!
+        \end{lstlisting}
+        \textbf{Main application dashboard}
+        \begin{figure}[H]
+            \centering
+            \begin{minipage}[H]{0.45\textwidth}
+                \centering
+                \includegraphics[width=1\linewidth]{screenshots/dashboard (1).png}
+                \caption{application dashboard}
+                \label{fig:application dashboard}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[H]{0.45\textwidth}
+                \centering
+                \includegraphics[width=1\linewidth]{screenshots/dashboard (2).png}
+                \caption{application dashboard}
+                \label{fig:application dashboard}
+            \end{minipage}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \begin{minipage}[H]{0.45\textwidth}
+                \centering
+                \includegraphics[width=1\linewidth]{screenshots/dashboard (3).png}
+                \caption{application dashboard}
+                \label{fig:application dashboard}
+            \end{minipage}
+            \hfill
+            \begin{minipage}[H]{0.45\textwidth}
+                \centering
+                \includegraphics[width=1\linewidth]{screenshots/dashboard (4).png}
+                \caption{application dashboard}
+                \label{fig:application dashboard}
+            \end{minipage}
+        \end{figure}
+                
+    \end{enumerate}
+\end{enumerate}
+
+\section{Discussion}
+
+\subsection{Technical Challenges}\\
+Complex View Implementation: PatientNextVisit required sophisticated subqueries and multiple joins to find the next scheduled appointment for each patient
+\\Trigger Logic: Expense recalculation triggers involved complex navigation through multiple table relationships (Includes → Prescription → ClinicalActivity → Expense → Stock)
+\\Application-Database Integration: Ensuring Flask properly handled database transactions and error scenarios
+
+\subsection{Performance Observations}\\
+Views significantly improved query performance by pre-computing complex joins
+\\Triggers added overhead but ensured data consistency
+\\The web application provided much faster data access compared to manual SQL queries
+
+\subsection{Lessons Learned}\\
+Database views are powerful for simplifying application code
+\\Proper trigger design is crucial for maintaining data integrity
+\\Web applications make database interactions more accessible to non-technical users
+\\Environment variables and proper configuration management are essential for security
+
+\section{Conclusion}
+
+This deliverable successfully enhanced the MNHS database system through three key components: optimized SQL views for improved query performance, robust triggers for business rule enforcement, and an intuitive web application for user-friendly data access. The implementation demonstrates how database features and application development work together to create a comprehensive healthcare management solution that is both technically sound and practically useful for medical staff.
+
+The project met all specified requirements while providing a solid foundation for future enhancements to the Moroccan National Health Services system.
+\end{document}
