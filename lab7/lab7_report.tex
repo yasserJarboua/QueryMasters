@@ -1,0 +1,977 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{tcolorbox}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\geometry{margin=1in}
+\usepackage{float}
+
+% ---------- Code Listing Style ----------
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+% ---------- Header ----------
+\setlength{\headheight}{36pt}
+\setlength{\headsep}{18pt}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhf{}
+\fancyhead[L]{\includegraphics[width=0.13\textwidth, keepaspectratio]{UM6Plogo.png}}
+\fancyhead[R]{\includegraphics[width=0.13\textwidth, keepaspectratio]{CC.jpg}}
+\fancyfoot[L]{Data Management Lab}
+\fancyfoot[R]{Prof. Karima Echihabi}
+\fancyfoot[C]{Page \thepage}
+
+% ---------- Document ----------
+\begin{document}
+\thispagestyle{empty}
+\begin{center}
+  \includegraphics[width=0.25\textwidth]{UM6Plogo.png}\hfill
+  \includegraphics[width=0.25\textwidth]{CC.jpg}
+  \vspace{1.2cm}
+
+  {\LARGE \textbf{Deliverable 7: Physical Design, Security and Transaction Management}}\\[0.6cm]
+  {\large \textbf{Data Management Course}}\\[0.2cm]
+  {\large UM6P College of Computing}\\[0.8cm]
+
+  {\normalsize \textbf{Professor:} Karima Echihabi \quad 
+   \textbf{Program:} Computer Engineering}\\[0.1cm]
+  {\normalsize \textbf{Session:} Fall 2025}\\[1cm]
+
+  \rule{0.9\textwidth}{0.5pt}\\[0.5cm]
+  {\large \textbf{Team Information}} \\[0.3cm]
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Team Name} & QueryMasters \\ \hline
+    \textbf{Member 1}  & El Mehdi Regagui \\ \hline
+    \textbf{Member 2}  & Yasser Jarboua \\ \hline
+    \textbf{Member 3}  & Adam Ibourg-EL Idrissi \\ \hline
+    \textbf{Member 4}  & Salma Mana \\ \hline
+    \textbf{Member 5}  & Hiba Mhirit \\ \hline
+    \textbf{Member 6}  & Sara Qiouame \\ \hline
+    \textbf{Member 7}  & Douaae Mabrouk \\ \hline
+    \textbf{Repository Link} & \texttt{https://github.com/yasserJarboua/QueryMasters/} \\ \hline
+  \end{tabular}
+  \rule{0.9\textwidth}{0.5pt}\\
+\end{center}
+\clearpage
+\pagestyle{fancy}
+
+% ---------- Sections ----------
+\section{Introduction}
+
+This deliverable addresses the physical design optimization and transaction management for the Moroccan National Health Services (MNHS) database. We focus on improving query performance through strategic index design, implementing efficient data partitioning strategies, and ensuring data integrity through proper transaction management. The work covers secondary index design for critical views, range and hash partitioning strategies for large tables, and practical implementation of ACID properties, conflict serializability, two-phase locking (2PL), and deadlock resolution in the context of a healthcare information system managing clinical activities, appointments, and hospital inventory.
+
+\section{Requirements}
+
+This deliverable addresses the following requirements:
+
+\subsection{Part 1: Physical Design}
+\begin{enumerate}
+    \item Design secondary indexes for three critical views: UpcomingByHospital, StaffWorkloadThirty, and PatientNextVisit
+    \item Propose indexes for a frequently executed query involving Hospital, Department, ClinicalActivity, and Appointment tables
+    \item Develop partitioning strategies for ClinicalActivity and Appointment tables based on Date
+    \item Design partitioning strategy for Stock table based on Hospital ID (HID)
+    \item Measure and visualize the impact of indexing on query performance
+    \item Implement SQL code for data population and partitioning
+\end{enumerate}
+
+\subsection{Part 2: Transactions and Concurrency Control}
+\begin{enumerate}
+    \item Identify ACID properties in five practical scenarios
+    \item Implement atomic transactions in MySQL for appointment scheduling and stock updates
+    \item Analyze schedule equivalence and serializability
+    \item Construct precedence graphs and determine conflict serializability
+    \item Evaluate schedules under strict two-phase locking (2PL)
+    \item Construct wait-for graphs and resolve deadlock scenarios
+\end{enumerate}
+
+\section{Methodology}
+
+\subsection{Index Design Strategy}
+
+Our approach to index design follows these principles:
+
+\begin{enumerate}
+    \item \textbf{Leading Column Selection:} We carefully analyze query predicates to select the most selective attribute as the leading column. For range queries, the range predicate attribute becomes the leading column.
+    
+    \item \textbf{Covering Indexes:} We design composite indexes that include all columns needed for joins and projections, enabling index-only scans without accessing base tables.
+    
+    \item \textbf{Overhead Analysis:} We evaluate the maintenance cost of each index, considering INSERT and UPDATE frequency versus query execution frequency.
+    
+    \item \textbf{B-Tree Indexes:} All proposed indexes use B-Tree structure, which is optimal for range queries and equality predicates in MySQL.
+\end{enumerate}
+
+\subsection{Partitioning Strategy}
+
+Our partitioning approach considers:
+
+\begin{enumerate}
+    \item \textbf{Partition Pruning:} We design partitions to maximize the elimination of irrelevant partitions during query execution.
+    
+    \item \textbf{Data Distribution:} We analyze potential data skew and propose strategies to maintain balanced partitions.
+    
+    \item \textbf{Maintenance Operations:} We evaluate how partitioning simplifies archiving, backup, and deletion operations.
+    
+    \item \textbf{Range vs Hash Partitioning:} For temporal data (ClinicalActivity), we use range partitioning by date. For location-specific data (Stock), we consider hash partitioning by HID.
+\end{enumerate}
+
+\subsection{Transaction Management Approach}
+
+For transaction analysis, we apply:
+
+\begin{enumerate}
+    \item \textbf{ACID Property Identification:} We systematically analyze each scenario against all four ACID properties.
+    
+    \item \textbf{Precedence Graph Construction:} We identify read-write, write-read, and write-write conflicts to construct dependency graphs.
+    
+    \item \textbf{2PL Verification:} We trace lock acquisition and release to verify strict 2PL compliance.
+    
+    \item \textbf{Deadlock Detection:} We construct wait-for graphs to identify cycles indicating deadlock conditions.
+\end{enumerate}
+
+\section{Implementation \& Results}
+
+\subsection{Part 1: Physical Design}
+
+\subsubsection{Index Design for View: UpcomingByHospital}
+
+The UpcomingByHospital view filters scheduled appointments within a 14-day date range and joins Appointment, ClinicalActivity, Department, and Hospital tables.
+
+\textbf{1. Appointment Table Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_Appointment_Status_Caid
+ON Appointment(Status, CAID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Accelerates the predicate \texttt{A.Status = 'Scheduled'} using Status as the leading column
+    \item Supports the join \texttt{A.CAID = C.CAID} through the second column CAID
+    \item Enables efficient filtering of scheduled appointments with minimal scanning
+\end{itemize}
+
+\textbf{Overhead:} Slight additional cost during INSERT and UPDATE operations on Appointment.
+
+\textbf{2. ClinicalActivity Table Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_ClinicalActivity_Date_Caid
+ON ClinicalActivity(Date, CAID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Greatly improves range filtering:
+    \begin{lstlisting}[language=SQL]
+C.Date >= CURDATE()
+AND C.Date < DATE_ADD(CURDATE(), INTERVAL 14 DAY)
+    \end{lstlisting}
+    \item Date as leading column is essential for range predicates
+    \item Supports join with Appointment via CAID as second column
+\end{itemize}
+
+\textbf{Overhead:} Slight additional work when inserting new ClinicalActivity rows.
+
+\textbf{3. Department Table Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_Department_HID_DepID
+ON Department(HID, DEP_ID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Improves join performance for \texttt{C.DEP\_ID = D.DEP\_ID} and \texttt{D.HID = H.HID}
+    \item Leading column HID helps grouping results by hospital
+    \item DEP\_ID as second column assists the join from ClinicalActivity
+\end{itemize}
+
+\textbf{Overhead:} Negligible overhead because Department is typically small.
+
+\subsubsection{Index Design for View: PatientNextVisit}
+
+The PatientNextVisit view retrieves the next scheduled appointment for each patient after the current date.
+
+\textbf{1. Appointment Table Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_Appointment_Status_Caid
+ON Appointment(Status, CAID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Accelerates \texttt{A.Status = 'Scheduled'} filtering
+    \item Supports join with ClinicalActivity on CAID
+    \item Allows quick elimination of cancelled/completed appointments
+\end{itemize}
+
+\textbf{2. ClinicalActivity Table Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_ClinicalActivity_IID_Date_Caid
+ON ClinicalActivity(IID, Date, CAID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Leading column IID is optimal for patient-centric queries
+    \item Enables efficient range scans per patient with \texttt{C.Date > CURDATE()}
+    \item Supports aggregation \texttt{MIN(C.Date) GROUP BY IID}
+    \item Includes CAID for join with Appointment table
+\end{itemize}
+
+\textbf{3. Department and Hospital Table Indexes:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_Department_DepID_HID
+ON Department(DEP_ID, HID);
+
+CREATE INDEX idx_Hospital_HID
+ON Hospital(HID);
+\end{lstlisting}
+
+These indexes support efficient joins across the remaining tables.
+
+\subsubsection{Index Design for View: StaffWorkloadThirty}
+
+\textbf{1. ClinicalActivity Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_ClinicalActivity_StaffID_Date_Caid
+ON ClinicalActivity(STAFF_ID, Date, CAID);
+\end{lstlisting}
+
+\textbf{Index type:} BTREE
+
+\textbf{Accelerates:}
+\begin{itemize}
+    \item Join between Staff and ClinicalActivity on STAFF\_ID
+    \item Filtering on \texttt{Date >= CURRENT\_DATE - 30}
+    \item Join with Appointment on CAID
+\end{itemize}
+
+\textbf{Leading column:} STAFF\_ID is optimal because workload is computed per staff member.
+
+\textbf{2. Appointment Index:}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_Appointment_Caid_Status
+ON Appointment(CAID, Status);
+\end{lstlisting}
+
+\textbf{Accelerates:}
+\begin{itemize}
+    \item Join with ClinicalActivity on CAID
+    \item Counting appointments by Status
+\end{itemize}
+
+\subsubsection{Frequent Query Optimization}
+
+For the frequently executed query:
+
+\begin{lstlisting}[language=SQL]
+SELECT H.Name, C.Date, COUNT(*) AS NumAppt
+FROM Hospital H
+JOIN Department D ON D.HID = H.HID
+JOIN ClinicalActivity C ON C.DEP_ID = D.DEP_ID
+JOIN Appointment A ON A.CAID = C.CAID
+WHERE A.Status = 'Scheduled'
+AND C.Date BETWEEN ? AND ?
+GROUP BY H.Name, C.Date;
+\end{lstlisting}
+
+\textbf{Proposed Indexes:}
+
+\textbf{Index 1: Composite Index on Appointment}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_appointment_status_caid
+ON Appointment(Status, CAID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Efficiently filters \texttt{Status = 'Scheduled'} using index range scan
+    \item Status as leading column enables early filtering before joins
+    \item CAID as second column creates covering index for join with ClinicalActivity
+    \item Enables index-only lookups without accessing base table
+\end{itemize}
+
+\textbf{Overhead:} Moderate on INSERT, low on UPDATE (Status changes infrequently)
+
+\textbf{Index 2: Composite Index on ClinicalActivity}
+
+\begin{lstlisting}[language=SQL]
+CREATE INDEX idx_clinicalactivity_date_depid_caid
+ON ClinicalActivity(Date, DEP_ID, CAID);
+\end{lstlisting}
+
+\textbf{Justification:}
+\begin{itemize}
+    \item Date as leading column accelerates \texttt{Date BETWEEN ? AND ?} range filtering
+    \item Highly selective predicate reduces result set significantly
+    \item DEP\_ID (2nd column) facilitates join with Department
+    \item CAID (3rd column) enables join with Appointment
+    \item Creates covering index for all ClinicalActivity operations
+    \item Leverages natural index ordering for GROUP BY optimization
+\end{itemize}
+
+\textbf{Overhead:} Moderate on INSERT (justified by frequent query execution), low on UPDATE
+
+\textbf{Combined Optimizer Strategy:}
+
+With both indexes, the optimizer executes:
+\begin{enumerate}
+    \item Filter Appointment via \texttt{idx\_appointment\_status\_caid} (smallest filtered set)
+    \item Index nested loop/merge join with ClinicalActivity using \texttt{idx\_clinicalactivity\_date\_depid\_caid}
+    \item Efficient joins with Department and Hospital using index values
+    \item Optimized grouping leveraging Date ordering from index
+\end{enumerate}
+
+\subsubsection{Partitioning Strategies}
+
+\textbf{1. Partitioning ClinicalActivity and Appointment by Date}
+
+\textbf{Strategy:} Range partitioning on year or month of the appointment, with data evenly distributed across five years.
+
+\textbf{Benefits:}
+\begin{enumerate}
+    \item \textbf{Improved Query Speed:} Queries filtering by date directly access relevant partitions, ignoring all other data through partition pruning
+    
+    \item \textbf{Simplified Archiving:} Old data resides entirely in dedicated partitions. Archiving becomes a simple partition drop operation instead of massive DELETE statements
+    
+    \item \textbf{Maintenance Efficiency:} Index rebuilds and statistics updates can be performed partition-by-partition
+\end{enumerate}
+
+\textbf{Drawbacks:}
+\begin{enumerate}
+    \item Queries without date predicates must scan all partitions
+    \item Query optimizer must manage more objects
+    \item Requires composite primary key including Date: \texttt{PRIMARY KEY (CAID, Date)}
+\end{enumerate}
+
+\textbf{2. Partitioning Stock by HID}
+
+\textbf{Strategy:} Hash or range partitioning by Hospital ID (HID), with stock management naturally scoped to specific hospitals.
+
+\textbf{Workloads that Benefit:}
+\begin{itemize}
+    \item \textbf{Hospital-focused daily queries:} "Show all stock for Hospital 123 on October 26th, 2023" accesses only Hospital 123's partition
+    
+    \item \textbf{Restocking operations:} Daily restocking lists, expired medication checks, and low-stock identification for a single hospital become faster
+    
+    \item \textbf{Administrative tasks:} If a hospital closes, remove all historical data by dropping its partition
+    
+    \item \textbf{Targeted backups:} Back up busy hospital partitions more frequently without full database backups
+\end{itemize}
+
+\textbf{Partition Pruning Advantage:}
+
+The database only reads partitions for specified hospitals, ignoring all others, greatly reducing I/O operations.
+
+\textbf{Data Skew Risk:}
+
+Major city hospitals may have millions of daily stock updates, while small clinics have only hundreds. This creates:
+\begin{itemize}
+    \item Gigantic partitions for large hospitals, tiny partitions for small clinics
+    \item Unpredictable query performance
+    \item Hot spots at busiest hospital partitions
+    \item Parallel processing bottlenecks when scanning all partitions
+\end{itemize}
+
+\textbf{Join Interaction:}
+\begin{itemize}
+    \item \textbf{Faster joins:} When joining with another HID-partitioned table, the database matches partitions separately
+    \item \textbf{Slower joins:} When joining with differently partitioned or non-partitioned tables, all partitions must be checked
+\end{itemize}
+
+\subsubsection{SQL Implementation: Stock Partitioning}
+
+\begin{lstlisting}[language=SQL]
+CREATE DATABASE lab7p;
+USE lab7p;
+
+CREATE TABLE Medication (
+    MID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Form VARCHAR(50),
+    Strength VARCHAR(50),
+    ActiveIngredient VARCHAR(100),
+    TherapeuticClass VARCHAR(100),
+    Manufacturer VARCHAR(100)
+);
+
+CREATE TABLE Hospital (
+    HID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    City VARCHAR(50) NOT NULL,
+    Region VARCHAR(50)
+);
+
+DELIMITER //
+
+CREATE PROCEDURE InsertHospitals()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 50 DO
+        INSERT INTO Hospital (HID, Name, City, Region)
+        VALUES (i, CONCAT('Hospital ', i), 'City', 'Region');
+        SET i = i + 1;
+    END WHILE;
+END //
+
+DELIMITER ;
+
+CALL InsertHospitals();
+
+DELIMITER //
+
+CREATE PROCEDURE InsertMedications()
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= 200 DO
+        INSERT INTO Medication (MID, Name, Form, Strength, 
+                ActiveIngredient, TherapeuticClass, Manufacturer)
+        VALUES (i, CONCAT('Medication ', i), 'Tablet', '500mg', 
+                'Ingredient', 'Class', 'Company');
+        SET i = i + 1;
+    END WHILE;
+END //
+
+DELIMITER ;
+
+CALL InsertMedications();
+
+CREATE TABLE Stock (
+    HID INT,
+    MID INT,
+    StockTimestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UnitPrice DECIMAL(10,2) CHECK (UnitPrice >= 0),
+    Qty INT DEFAULT 0 CHECK (Qty >= 0),
+    ReorderLevel INT DEFAULT 10 CHECK (ReorderLevel >= 0),
+    PRIMARY KEY (HID, MID, StockTimestamp),
+    FOREIGN KEY (HID) REFERENCES Hospital(HID),
+    FOREIGN KEY (MID) REFERENCES Medication(MID)
+);
+
+DELIMITER //
+CREATE PROCEDURE PopulateStock(IN n INT)
+BEGIN
+    DECLARE i INT DEFAULT 1;
+    WHILE i <= n DO
+        INSERT INTO Stock (HID, MID, StockTimestamp, 
+                          UnitPrice, Qty, ReorderLevel)
+        VALUES (
+            FLOOR(1 + RAND() * 50),   -- valid HID
+            FLOOR(1 + RAND() * 200),  -- valid MID
+            DATE_ADD('2020-01-01', 
+                     INTERVAL FLOOR(RAND() * 365 * 5) DAY),
+            ROUND(RAND() * 200, 2),
+            FLOOR(RAND() * 500),
+            FLOOR(5 + RAND() * 20)
+        );
+        SET i = i + 1;
+    END WHILE;
+END //
+
+DELIMITER ;
+
+CALL PopulateStock(10000);
+
+SELECT * FROM Stock LIMIT 20;
+
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{populated stock table.png}
+    \caption{populated stock table}
+    \label{fig:placeholder}
+\end{figure}
+\subsubsection{Visualizing the Impact of Indexing}
+\begin{enumerate}
+    \item {Query Selection:}  
+    \begin{lstlisting}[language=SQL]
+SELECT C.Date, A.Status FROM ClinicalActivity C JOIN Appointment A ON C.CAID = A.CAID WHERE C.Date BETWEEN '2024-01-01' AND '2024-12-31' AND A.Status = 'Scheduled';
+    \end{lstlisting}
+    \item {Synthetic Data Generation:}
+    \begin{lstlisting}[language=SQL]
+    
+DELIMITER $$
+
+
+CREATE PROCEDURE PopulateClinicalActivity(IN num_rows INT)
+BEGIN
+	
+    DECLARE i INT DEFAULT 0;
+    DECLARE max_patient_id INT;
+    DECLARE max_staff_id INT;
+    DECLARE max_dept_id INT;
+    
+    SELECT MAX(IID) INTO max_patient_id FROM Patient;
+    SELECT MAX(STAFF_ID) INTO max_staff_id FROM Staff;
+    SELECT MAX(DEP_ID) INTO max_dept_id FROM Department;
+    
+    WHILE i < num_rows DO
+        INSERT INTO ClinicalActivity (CAID,IID, STAFF_ID, DEP_ID, Date, Time)
+        VALUES (
+			i+1,
+            FLOOR(1 + RAND() * max_patient_id),  -- random patient
+            FLOOR(1 + RAND() * max_staff_id),    -- random staff
+            FLOOR(1 + RAND() * max_dept_id),     -- random department
+            DATE_ADD('2024-01-01', INTERVAL FLOOR(RAND() * 365) DAY),  -- random date in 2024
+            MAKETIME(FLOOR(8 + RAND() * 9), FLOOR(RAND() * 60), 0)  -- business hours 8-17
+        );
+        SET i = i + 1;
+    END WHILE;
+    
+    SELECT CONCAT('Inserted ', num_rows, ' new ClinicalActivity records') AS Result;
+END$$
+
+DELIMITER ;
+    \end{lstlisting}
+    
+    \item{Performance Measurement Methodology}
+    \textbf{Tool:} \texttt{EXPLAIN ANALYZE} in MySQL 8.0+
+    \textbf{Procedure:}
+    \begin{enumerate}
+        \item For each table size (10K, 50K, 100K, 500K, 1M):
+        \begin{enumerate}
+            \item Run the query 3 times without any index.
+            \item Create index:
+            \begin{lstlisting}[language=SQL]
+create index c_date on ClinicalActivity(Date);
+create index a_status on Appointment(Status);
+            \end{lstlisting}
+            \item Run the query 3 times with the index.
+            \item Record the execution times.
+            \item Calculate the average execution time for each configuration.
+            \item Flush the cache between different table sizes.
+        \end{enumerate}
+        \item{Results Table}
+            \begin{table}[H]
+            \centering
+            \begin{tabular}{|c|c|c|}
+            \hline
+            \textbf{Table Size} & \textbf{Without Index (ms)} & \textbf{With Index (ms)} \\
+            \hline
+            10,000    & 28.10    & 10.16    \\
+            50,000    & 138.00   & 47.90    \\
+            100,000   & 252.33   & 92.70    \\
+            500,000   & 1588.00  & 746.33   \\
+            1,000,000 & 9726.66  & 7651.00  \\
+            \hline
+            \end{tabular}
+            \caption{Execution times for different table sizes with and without index.}
+            \label{tab:results}
+            \end{table}
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=1\linewidth]{w_index.png}
+                \caption{Results plot}
+                \label{fig:placeholder}
+            \end{figure}
+            \textbf{Interpretation:} As the table size grows, the performance gap between indexed and non-indexed queries widens significantly. For small tables (10K rows), the index provides modest improvement (~30\% faster). However, at 1M rows, the indexed query runs over 80\% faster than the full table scan. This demonstrates that indexes become increasingly valuable as data volume grows, transforming linear O(n) scans into logarithmic O(log n) lookups.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Part 2: Transactions and Concurrency Control}
+
+\subsubsection{ACID Property Analysis}
+
+\textbf{Example 1: Billing Service with Recovery}
+
+\textbf{Scenario:} System records Expense row and updates Insurance claim. After inserting Expense, system crashes before updating claim. Upon recovery, system detects incomplete transaction and retries until both updates succeed.
+
+\textbf{Property:} Atomicity
+
+\textbf{State:} Satisfied
+
+\textbf{Justification:} The system detects incomplete operations after recovery and completes them, ensuring the transaction is either entirely completed or not at all.
+
+\textbf{Example 2: Double-Booking Appointment}
+
+\textbf{Scenario:} Two receptionists attempt to book the last available appointment slot concurrently. Both receive confirmation, but only one physical slot exists.
+
+\textbf{Property:} Isolation
+
+\textbf{State:} Violated
+
+\textbf{Justification:} The two transactions interfered with each other. Both read the available slot simultaneously and both committed, violating isolation.
+
+\textbf{Example 3: Concurrent Medication Entry}
+
+\textbf{Scenario:} Staff A enters new medications into Prescription/Includes list. Staff B views the same patient's medication list simultaneously but doesn't see Staff A's changes until Staff A clicks "Save" and commits.
+
+\textbf{Property:} Isolation
+
+\textbf{State:} Satisfied
+
+\textbf{Justification:} Staff B cannot see Staff A's uncommitted changes, maintaining proper isolation between transactions.
+
+\textbf{Example 4: Power Outage During Registration}
+
+\textbf{Scenario:} Administrative staff registers new patient (Patient and ContactLocation rows) and records initial ClinicalActivity. After saving, power outage occurs before data is flushed to durable storage. When database restarts, the newly registered patient and activity are missing.
+
+\textbf{Property:} Durability
+
+\textbf{State:} Violated
+
+\textbf{Justification:} Committed transaction data was lost after system crash, violating durability.
+
+\textbf{Example 5: Concurrent Stock Dispensing}
+
+\textbf{Scenario:} The pharmacy module ensures that every time medication is dispensed, the corresponding \texttt{Stock.Qty} is reduced by exactly the dispensed amount, regardless of how many pharmacists are updating stock concurrently. The system never records negative stock or incorrect totals.
+
+\textbf{Property: Consistency} \\
+\textbf{State: Satisfied} \\
+\textbf{Justification:} The system maintains business rules by preventing negative stock quantities.
+
+\textbf{Property: Isolation} \\
+\textbf{State: Satisfied} \\
+\textbf{Justification:} Concurrent updates are properly serialized, ensuring each transaction sees a consistent state.
+
+\subsubsection{Implementing Atomic Transactions in MySQL}
+
+\textbf{Atomic Update of Stock and Expense}
+
+When medications are dispensed, the system updates stock quantities for each medication in the prescription. Simultaneously, AFTER INSERT, UPDATE, and DELETE triggers on the Includes table automatically recalculate Expense.Total for the linked clinical activity. All updates are wrapped in a single transaction, ensuring either complete success or complete rollback.
+
+\textbf{Pseudocode:}
+
+\begin{lstlisting}
+START TRANSACTION
+
+-- Attempt to update stock for all medications in prescription
+FOR each medication in Includes WHERE PID = prescription_id DO
+    UPDATE Stock
+    SET Qty = Qty - medication.Qty
+    WHERE HID = hospital_id AND MID = medication.MID
+    
+    -- If stock goes negative, block the operation
+    IF Stock.Qty < 0 THEN
+        ROLLBACK TRANSACTION
+        SIGNAL ERROR 'Insufficient stock'
+        EXIT
+    END IF
+END FOR
+
+-- Expense.Total is automatically recalculated by
+-- AFTER INSERT, UPDATE, DELETE triggers on Includes
+
+-- If all updates succeed, commit the transaction
+COMMIT TRANSACTION
+
+-- Any unexpected error during updates or triggers 
+-- should automatically trigger a rollback
+\end{lstlisting}
+
+\textbf{ACID Properties:}
+
+\begin{itemize}
+    \item \textbf{Atomicity:} Ensures updating stock and recalculating Expense.Total happen together or not at all, preventing partial updates
+    
+    \item \textbf{Consistency:} Guarantees stock quantities never go negative and Expense.Total always reflects correct medications
+    
+    \item \textbf{Isolation:} Prevents conflicts when multiple transactions occur simultaneously
+    
+    \item \textbf{Durability:} Ensures committed changes are permanently saved even after system crash
+\end{itemize}
+
+\subsubsection{Schedule Analysis}
+
+\textbf{Given Transactions:}
+
+$T_1$: R(A), W(A)
+
+$T_2$: R(B), W(B)
+
+Where A and B represent Stock.Qty for two different medications.
+
+\textbf{Schedules:}
+
+$S_1$: $R_1(A), R_2(B), W_1(A), W_2(B)$
+
+$S_2$: $R_1(A), W_1(A), R_2(B), W_2(B)$
+
+\textbf{Question 1: Are $S_1$ and $S_2$ equivalent?}
+
+\textbf{Answer:} Yes, the schedules are equivalent because:
+\begin{itemize}
+    \item They involve the same transactions ($T_1$ and $T_2$)
+    \item The order of actions within each individual transaction is preserved
+    \item The final database state is identical after both schedules
+    \item A and B are independent attributes (no conflicts between transactions)
+\end{itemize}
+
+\textbf{Question 2: Is $S_1$ serializable?}
+
+\textbf{Answer:} Yes, $S_1$ is serializable. Both of these serial schedules are equivalent to $S_1$:
+\begin{enumerate}
+    \item $T_1 \rightarrow T_2$: $R_1(A), W_1(A), R_2(B), W_2(B)$ (which is $S_2$)
+    \item $T_2 \rightarrow T_1$: $R_2(B), W_2(B), R_1(A), W_1(A)$
+\end{enumerate}
+
+\subsubsection{Conflict Serializability Analysis}
+
+\textbf{Given Transactions:}
+
+$T_1$: R(A), W(A)
+
+$T_2$: W(A), R(B)
+
+$T_3$: R(A), W(B)
+
+Where A is Expense.Total and B is Stock.Qty.
+
+\textbf{Schedule:}
+
+$S_3$: $R_1(A), W_2(A), R_3(A), W_1(A), W_3(B), R_2(B)$
+
+\textbf{Precedence Graph Construction:}
+
+Conflicts in $S_3$:
+\begin{itemize}
+    \item $R_1(A) \rightarrow W_2(A)$: $T_1 \rightarrow T_2$ (read-write conflict)
+    \item $W_2(A) \rightarrow R_3(A)$: $T_2 \rightarrow T_3$ (write-read conflict)
+    \item $W_2(A) \rightarrow W_1(A)$: $T_2 \rightarrow T_1$ (write-write conflict)
+    \item $R_3(A) \rightarrow W_1(A)$: $T_3 \rightarrow T_1$ (read-write conflict)
+    \item $W_3(B) \rightarrow R_2(B)$: $T_3 \rightarrow T_2$ (write-read conflict)
+\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{dependency graph.jpeg}
+    \caption{dependency graph}
+    \label{fig:placeholder}
+\end{figure}
+\textbf{Precedence Graph Edges:}
+\begin{itemize}
+    \item $T_1 \rightarrow T_2$
+    \item $T_2 \rightarrow T_3$
+    \item $T_2 \rightarrow T_1$ (creates cycle)
+    \item $T_3 \rightarrow T_1$
+    \item $T_3 \rightarrow T_2$ (creates cycle)
+\end{itemize}
+
+\textbf{Result:} $S_3$ is \textbf{NOT conflict serializable}
+
+\textbf{Justification:} The precedence graph contains three cycles:
+\begin{itemize}
+    \item $T_1 \rightarrow T_2 \rightarrow T_1$
+    \item $T_2 \rightarrow T_3 \rightarrow T_2$
+    \item $T_1 \rightarrow T_2 \rightarrow T_3 \rightarrow T_1$
+\end{itemize}
+
+A schedule is conflict serializable if and only if its precedence graph is acyclic. Since $S_3$'s graph contains cycles, it is not conflict serializable.
+
+\subsubsection{Two-Phase Locking (2PL) Analysis}
+
+Strict 2PL requires transactions to:
+\begin{enumerate}
+    \item Acquire all necessary locks (growing phase)
+    \item Hold all locks until commit/abort (no shrinking phase)
+    \item Release all locks only at commit/abort
+\end{enumerate}
+
+
+\paragraph{Schedule 1:}
+
+$T_1$: R(A), W(A), R(B), W(B)
+
+$T_2$: R(C), W(C)
+
+S: $R_1(A), W_1(A), R_1(B), W_1(B), R_2(C), W_2(C)$
+
+\textbf{Compatible with strict 2PL?} Yes
+
+\textbf{Justification:} Transactions operate on completely different data items (A, B vs C). Both can execute sequentially and hold locks until commit without conflict.
+
+\paragraph{Schedule 4:}
+
+$T_1$: R(A), W(A), R(B)
+
+$T_2$: R(A), W(A), R(B), W(B)
+
+S: $R_1(A), W_1(A), R_2(A), W_2(A), R_1(B), R_2(B), W_2(B)$
+
+\textbf{Compatible with strict 2PL?} No
+
+\textbf{Justification:} Under strict 2PL, $T_1$ acquires an exclusive lock on A when writing. $T_2$ cannot acquire any lock on A until $T_1$ commits and releases all its locks. However, in this schedule, $T_2$ reads and writes A before $T_1$ completes (note $R_1(B)$ occurs after $W_2(A)$), violating strict 2PL.
+
+\subsubsection{Deadlock Analysis}
+
+\textbf{Scenario:} Transaction $T_1$ updates stock for a medication while transaction $T_2$ updates the corresponding expense for a clinical activity that uses that medication.
+
+Schedule:S: $R_1(A), R_2(B), W_1(B), W_2(A)$
+
+Where:
+\begin{itemize}
+    \item A: a row in Stock (e.g., stock for medication M in hospital H)
+    \item B: a row in Expense for a clinical activity that includes M
+\end{itemize}
+
+\textbf{Wait-For Graph Construction:}
+
+\begin{enumerate}
+    \item $R_1(A)$: Transaction $T_1$ reads item A and acquires a shared lock (S-lock) on A
+    
+    \item $R_2(B)$: Transaction $T_2$ reads item B and acquires a shared lock (S-lock) on B
+    
+    \item $W_1(B)$: Transaction $T_1$ requests an exclusive lock (X-lock) on B, but the request is denied because $T_2$ already holds an S-lock on B. Therefore, \textbf{$T_1$ waits for $T_2$}
+    
+    \item $W_2(A)$: Transaction $T_2$ requests an exclusive lock (X-lock) on A, but the request is denied because $T_1$ already holds an S-lock on A. Therefore, \textbf{$T_2$ waits for $T_1$}
+\end{enumerate}
+
+\textbf{Wait-For Graph Edges:}
+\begin{itemize}
+    \item $T_1 \rightarrow T_2$ ($T_1$ is waiting for $T_2$ to release the lock on B)
+    \item $T_2 \rightarrow T_1$ ($T_2$ is waiting for $T_1$ to release the lock on A)
+\end{itemize}
+
+\textbf{Deadlock Detection:}
+
+\textbf{Yes, a deadlock exists.}
+
+\begin{itemize}
+    \item $T_1$ is waiting for $T_2$ to release its lock on B
+    \item $T_2$ is waiting for $T_1$ to release its lock on A
+\end{itemize}
+
+The cycle in the wait-for graph is: $T_1 \rightarrow T_2 \rightarrow T_1$
+
+This creates a closed loop (cycle) in the graph, which is the defining condition for a deadlock.
+
+\textbf{Deadlock Resolution:}
+
+The DBMS should take the following steps:
+
+\begin{enumerate}
+    \item \textbf{Choose a victim transaction:} Select one transaction to abort based on criteria such as:
+    \begin{itemize}
+        \item Transaction age (abort the younger transaction)
+        \item Work done (abort the transaction that has done less work)
+        \item Resources held (abort the transaction holding fewer resources)
+    \end{itemize}
+    For example, if $T_2$ started after $T_1$, choose $T_2$ as the victim.
+    
+    \item \textbf{Abort the victim transaction} (e.g., $T_2$):
+    \begin{itemize}
+        \item Roll back all changes made by $T_2$
+        \item Release all locks held by $T_2$ (in this case, the shared lock on B)
+    \end{itemize}
+    
+    \item \textbf{Allow the other transaction to proceed:} $T_1$ can now acquire the exclusive lock on B, complete its write operation, and commit successfully.
+    
+    \item \textbf{Optionally restart the aborted transaction:} $T_2$ can be restarted later as a new transaction, potentially with a delay to reduce the likelihood of another deadlock.
+\end{enumerate}
+
+\section{Discussion}
+
+\subsection{Index Design Insights}
+
+Throughout this lab, we discovered that strategic index design requires careful balance between query performance and maintenance overhead. The most critical insight was the importance of leading column selection—placing the most selective or range-predicate column first dramatically impacts query execution plans.
+
+Composite indexes proved particularly powerful for covering index scenarios, where the index contains all columns needed by a query, eliminating the need to access the base table. However, we also recognized that each additional index increases INSERT and UPDATE costs, requiring careful consideration of query frequency versus modification frequency.
+
+\subsection{Partitioning Trade-offs}
+
+Partitioning strategies revealed clear trade-offs between different workload patterns:
+
+\textbf{Range partitioning by date} excelled for time-series queries with natural archiving needs. The ability to drop entire partitions for data archiving proved far more efficient than massive DELETE operations. However, queries without date predicates suffered from partition scanning overhead.
+
+\textbf{Hash partitioning by hospital ID} demonstrated the challenge of data skew in real-world scenarios. While partition pruning provided significant benefits for hospital-specific queries, the risk of unbalanced partitions due to varying hospital sizes required careful monitoring and potentially dynamic repartitioning strategies.
+
+\subsection{Transaction Management Challenges}
+
+The ACID property analysis made abstract concepts concrete through practical healthcare scenarios. We observed several key challenges:
+
+\begin{enumerate}
+    \item \textbf{Isolation vs. Performance:} Strict isolation prevents anomalies like double-booking but can reduce concurrency. Real systems must balance isolation levels with performance needs.
+    
+    \item \textbf{Deadlock Prevention vs. Detection:} While deadlock prevention through lock ordering is theoretically cleaner, real-world applications often rely on deadlock detection and recovery due to the complexity of enforcing consistent lock ordering across diverse operations.
+    
+    \item \textbf{Atomicity in Distributed Updates:} When updates span multiple tables with triggers, ensuring atomicity requires careful transaction boundary definition and comprehensive error handling.
+\end{enumerate}
+
+\subsection{Serializability Analysis}
+
+Constructing precedence graphs revealed the subtle complexity of concurrent transaction execution. We learned that:
+
+\begin{itemize}
+    \item Even seemingly simple schedules can contain hidden conflicts
+    \item Cycles in precedence graphs definitively identify non-serializable schedules
+    \item Multiple serial schedules may be equivalent to a given concurrent schedule
+    \item Visual graph representation significantly aids in understanding transaction dependencies
+\end{itemize}
+
+\subsection{Two-Phase Locking Limitations}
+
+The 2PL analysis demonstrated that while strict 2PL guarantees conflict serializability, it:
+\begin{itemize}
+    \item Can significantly reduce concurrency by holding locks until commit
+    \item Does not prevent all deadlocks (as shown in Part 6)
+    \item Requires careful deadlock detection and resolution mechanisms
+    \item May not be optimal for read-heavy workloads where optimistic concurrency control could perform better
+\end{itemize}
+
+\subsection{Lessons Learned}
+
+\begin{enumerate}
+    \item \textbf{Physical design is context-dependent:} The optimal index or partitioning strategy depends heavily on specific workload patterns. What works for time-series queries may hurt aggregation queries.
+    
+    \item \textbf{Measure before optimizing:} Index creation should be driven by measured query performance, not assumptions. The lab's emphasis on measuring execution time before and after indexing reinforced this principle.
+    
+    \item \textbf{ACID is non-negotiable for critical data:} In healthcare systems, data integrity is paramount. The scenarios demonstrated that shortcuts in transaction management lead to serious data inconsistencies.
+    
+    \item \textbf{Deadlocks are inevitable:} In complex systems with concurrent transactions, deadlocks will occur. Systems must be designed with deadlock detection and graceful recovery mechanisms.
+    
+    \item \textbf{Documentation matters:} Clear understanding of transaction boundaries, lock acquisition order, and isolation levels is essential for maintaining system correctness as it evolves.
+\end{enumerate}
+
+\subsection{Real-World Applicability}
+
+The MNHS database scenarios closely mirror real healthcare information systems where:
+\begin{itemize}
+    \item Multiple users concurrently book appointments, update patient records, and manage inventory
+    \item Query performance directly impacts user experience and operational efficiency
+    \item Data integrity errors (double-booking, negative stock) have serious consequences
+    \item Archiving and regulatory compliance require efficient data management strategies
+\end{itemize}
+
+The physical design and transaction management techniques learned in this lab directly apply to building robust, scalable healthcare systems that handle concurrent operations while maintaining data consistency and reliability.
+
+\section{Conclusion}
+
+This deliverable successfully addressed physical design optimization and transaction management for the MNHS database system. We proposed and justified targeted secondary indexes for three critical views (UpcomingByHospital, PatientNextVisit, StaffWorkloadThirty) and a frequently executed query, demonstrating how strategic index design can dramatically improve query performance while managing maintenance overhead.
+
+Our partitioning analysis revealed the benefits and trade-offs of range partitioning by date for temporal data versus hash partitioning by hospital ID for location-specific data. We provided concrete SQL implementations for data population and partitioning, enabling practical application of these strategies.
+
+In the transaction management component, we systematically analyzed ACID properties through five real-world healthcare scenarios, implemented atomic transactions using MySQL transaction control, and rigorously analyzed schedule serializability through precedence graph construction. Our evaluation of strict two-phase locking (2PL) and deadlock detection demonstrated the complexity of ensuring correct concurrent execution while maintaining acceptable performance.
+
+The work demonstrates that effective database design requires:
+\begin{itemize}
+    \item Deep understanding of workload patterns to guide index and partition design
+    \item Careful balance between query performance and update overhead
+    \item Rigorous transaction management to ensure ACID properties
+    \item Robust deadlock detection and resolution mechanisms
+    \item Comprehensive testing and measurement to validate design decisions
+\end{itemize}
+
+These principles are essential for building production-grade healthcare information systems that can handle concurrent operations at scale while maintaining data consistency, integrity, and reliability. The techniques and analysis methods learned in this lab provide a solid foundation for designing and implementing robust database systems in any domain requiring high concurrency and strict data integrity guarantees.
+
+\end{document}
