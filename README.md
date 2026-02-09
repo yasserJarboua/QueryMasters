@@ -28,64 +28,80 @@ Design and implement a comprehensive database system to help MNHS manage patient
 ---
 
 ## 📋 Project Phases
-### Phase 1: Conceptual Design (Completed)
-- ER model development with comprehensive entity relationships
-- Business requirement analysis and constraint specification
-- Conceptual schema validation against healthcare workflows
-### Phase 2: Relational Schema & SQL Implementation (Completed)
-- Translation of ER model into normalized relational schema
-- Primary key, foreign key, and constraint specification
-- SQL implementation with CREATE TABLE statements and sample data
-- Query development for business intelligence
-  
+### Phase 1: Conceptual Design ✔
+-ER modeling and requirements analysis
+### Phase 2: Relational Schema & SQL ✔
+-Normalization, schema design, SQL implementation
+### Phase 3: Physical Design & Security
+-Storage, performance, and access control
+### Phase 4: Relational Algebra
+-Algebraic query representation
+### Phase 5: Relation Schema
+-Final schema definition
+### Phase 6: Views, Triggers & Web App
+-Views, triggers, and application integration
 ---
 
 ## 📂 Repository Structure
 ```
 .
-├── ConceptualDesign/
-|   ├── Figures/
-|   |   ├── CC.jpg
-|   |   ├── ER Diagram.png
-|   |   └── UM6Plogo.png
-|   |
-|   ├── Conceptual_Design_Report.pdf
-|   ├── DMG_Project.tex
-|   └── UM6P_CC_DMG_LAB2-2.pdf
-|
-├── RelationSchema/
-|   ├── Figures/
-|   |   ├── CC.jpg
-|   |   ├── Hospital.png
-|   |   ├── Patient.png
-|   |   ├── UM6Plogo.png
-|   |   ├── query.png
-|   |   └── show tables.png
-|   |
-|   ├── Tables_Screenshots/
-|   |
-|   ├── Latex_Code.tex
-|   ├── Relational_Schema_Report.pdf
-|   ├── SQL_Implementation.sql
-|   └── UM6P_CC_DM-LAB3-2.pdf
-|
-└── README.md
-```
----
+.
+├── README.md
+│
+├── Conceptual_Design
+│   ├── Conceptual_Design_Report.pdf
+│   ├── DMG_Project.tex
+│   ├── UM6P_CC_DMG_LAB2-2.pdf
+│   └── Figures
+│
+├── Relational_Schema
+│   ├── Latex_Code.tex
+│   ├── Relational_Schema_Report.pdf
+│   ├── SQL_Implementation.sql
+│   ├── UM6P_CC_DM-LAB3-2.pdf
+│   └── Figures
+│
+├── Relational_Algebra
+│   ├── Relational_Algebra_Report.pdf
+│   ├── SQL_Code.sql
+│   └── UM6P_CC_DM_Lab4.pdf
+│
+├── Normalization_and_SQL
+│   ├── Latex_Code.tex
+│   ├── Normalization_Report.pdf
+│   ├── SQL_Code.sql
+│   ├── Figures
+│   └── Query_Screenshots
+│
+├── Physical_Design_Security_Transactions
+│   ├── Dependency_Graph.jpeg
+│   ├── dependency_graph.jpeg
+│   ├── LAB7_report.pdf
+│   ├── lab7_report.tex
+│   ├── populated_stock_table.png
+│   └── w_index.png
+│
+└── Views_Triggers_and_Web_App
+    ├── Lab6_Report
+    │   ├── lab6.tex
+    │   ├── lab6_report.pdf
+    │   ├── Figures
+    │   └── Screenshots
+    │
+    └── Web_Application
+        ├── database.py
+        ├── main.py
+        ├── README.md
+        ├── requirements.txt
+        ├── run.bat
+        ├── run.sh
+        ├── setup.bat
+        ├── setup.sh
+        ├── static
+        └── templates
 
-## 🛠️ Technical Implementation
-### Database Features
-- Optimized relational design minimizing data redundancy
-- ISA Hierarchies for staff specialization (Practitioner, Caregiving, Technical)
-- Composite Keys for many-to-many relationships
-- Referential Integrity with foreign key constraints
-- Domain Validation through CHECK constraints
-### Core SQL Components
-- 15+ table definitions with appropriate data types
-- Primary and foreign key relationships
-- Sample data insertion for testing
-- Business queries for patient management
-- Constraint enforcement for data quality
+```
+
 
 ---
 
@@ -96,7 +112,7 @@ Design and implement a comprehensive database system to help MNHS manage patient
 - Sample Data Population
 - Business Intelligence Queries
 - Technical Documentation
----
+
 
 
 ## 📅 Course Information
