@@ -28,18 +28,18 @@ Design and implement a comprehensive database system to help MNHS manage patient
 ---
 
 ## 📋 Project Phases
-### Phase 1: Conceptual Design ✔
--ER modeling and requirements analysis
-### Phase 2: Relational Schema & SQL ✔
--Normalization, schema design, SQL implementation
+### Phase 1: Conceptual Design 
+- ER modeling and requirements analysis
+### Phase 2: Relational Schema & SQL 
+- Normalization, schema design, SQL implementation
 ### Phase 3: Physical Design & Security
--Storage, performance, and access control
+- Storage, performance, and access control
 ### Phase 4: Relational Algebra
--Algebraic query representation
+- Algebraic query representation
 ### Phase 5: Relation Schema
--Final schema definition
+- Final schema definition
 ### Phase 6: Views, Triggers & Web App
--Views, triggers, and application integration
+- Views, triggers, and application integration
 ---
 
 ## 📂 Repository Structure
@@ -106,13 +106,12 @@ Design and implement a comprehensive database system to help MNHS manage patient
 ---
 
 ## 📊 Key Deliverables
-- Comprehensive ER Model Design
-- Relational Schema with Constraints
-- SQL Database Implementation
-- Sample Data Population
-- Business Intelligence Queries
-- Technical Documentation
-
+- Conceptual Design: ER modeling and conceptual report
+- Relational Schema: Logical design and SQL implementation
+- Relational Algebra: Formal query expressions
+- Normalization & SQL: Functional dependencies and normalized schema
+- Physical Design & Security: Indexing, transactions, and dependency analysis
+- Views, Triggers & Web App: Database automation and web integration
 
 
 ## 📅 Course Information
